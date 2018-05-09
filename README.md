@@ -39,6 +39,6 @@ Folder: 3.seq_tosubmit - A placeholder and also a working folder to put all file
 **Part IV**
 Folder: 4.data_postprocess - A placeholder to put all web-based downloaded files and also serve as working folder for post data analysis
 Contents:
-1. R projec
-2. Results from EpiCC (.csv files)
-3. Results from JMX (.html files)
+1. R project
+2. EpiCC results for Class I/II (.csv files)
+3. JMX results for Class I/II (.html files)
