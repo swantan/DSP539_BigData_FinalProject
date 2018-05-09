@@ -1,13 +1,12 @@
 # Manual for Data Pre-processing
 
-```mkdir 2.data_preprocess```<br/> 
+**Data preparation**<br/>
+→```mkdir 2.data_preprocess```<br/> 
 → create R project (with dataset, scrips, output folders) and Python script in your current working directory<br/> 
-→ ```cp 1.dataset/H1N1_swineIAV.FASTA 1.dataset/H1N1_swineIAV.XLS 2.data_preprocess/```
-
-```mkdir 3.seq_tosubmit```<br/> 
-→ ```cp 1.dataset/DNAvaccineseq.pep 1.dataset/vaccine_epitopes_classI.txt 1.dataset/vaccine_epitopes_classII.txt 3.seq_tosubmit/```
-
-```cd 2.data_preprocess```<br/>
+→ ```cp 1.dataset/H1N1_swineIAV.FASTA 1.dataset/H1N1_swineIAV.XLS 2.data_preprocess/```<br/>
+→```mkdir 3.seq_tosubmit```<br/> 
+→ ```cp 1.dataset/DNAvaccineseq.pep 1.dataset/vaccine_epitopes_classI.txt 1.dataset/vaccine_epitopes_classII.txt 3.seq_tosubmit/```<br/>
+→```cd 2.data_preprocess```<br/>
 
 **Pre-processing of nucleotide sequence data**<br/>
 1.	To check how’s the sequence file look like<br/>
