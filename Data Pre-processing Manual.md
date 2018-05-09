@@ -71,23 +71,23 @@ do cat swinefluH1N1\_segment$i\_$j.pep | awk '/^>/{split($0,a,"|"); print a[1]"|
 > swinefluH1N1\_segment$i\_$j\_v2.pep; 
 done; done
 ```
-  *```mkdir seq_foruse```<br/>
-  *```mv swinefluH1N1_segment1_PB2_v2.pep swinefluH1N1_segment2_PB1_v2.pep swinefluH1N1_segment3_PA_v2.pep swinefluH1N1_segment4_HA_v2.pep swinefluH1N1_segment5_NP_v2.pep swinefluH1N1_segment6_NA_v2.pep swinefluH1N1_segment7_M_v2.pep swinefluH1N1_segment8_NS_v2.pep seq_foruse/```<br/>
-  *```rm *v2.pep```<br/>
+* ```mkdir seq_foruse```<br/>
+* ```mv swinefluH1N1_segment1_PB2_v2.pep swinefluH1N1_segment2_PB1_v2.pep swinefluH1N1_segment3_PA_v2.pep swinefluH1N1_segment4_HA_v2.pep swinefluH1N1_segment5_NP_v2.pep swinefluH1N1_segment6_NA_v2.pep swinefluH1N1_segment7_M_v2.pep swinefluH1N1_segment8_NS_v2.pep seq_foruse/```<br/>
+* ```rm *v2.pep```<br/>
 15.	```cd seq_foruse/```<br/>
 16.	Manually further edit sequence header using vi editor<br/>
 * ```vi <filename>```<br/>
-    *For example: ```vi swinefluH1N1_segment4_HA_v2.pep```<br/>
-    *Hit ‘Esc’ to enter coding mode everytime (do not hit ‘I’) and things to edit are as below:<br/>
-     *```:%s/rf 1 //g```<br/>
-     *```:%s/rf 3 //g```<br/>
-     *```:%s/Strain Name://g```<br/>
-     *```:%s/:/_/g```<br/>
-     *```:%s/ //g```<br/>
-     *```:%s/\//_/g```<br/>
-     *```:%s/|/-/g```<br/>
-    *After done all the above, hit ‘Esc’ again and type the command below to save<br/>
-     *```:wq!```<br/>
+* For example: ```vi swinefluH1N1_segment4_HA_v2.pep```<br/>
+* Hit ‘Esc’ to enter coding mode everytime (do not hit ‘I’) and things to edit are as below:<br/>
+*  ```:%s/rf 1 //g```<br/>
+*  ```:%s/rf 3 //g```<br/>
+*  ```:%s/Strain Name://g```<br/>
+*  ```:%s/:/_/g```<br/>
+*  ```:%s/ //g```<br/>
+*  ```:%s/\//_/g```<br/>
+*  ```:%s/|/-/g```<br/>
+* After done all the above, hit ‘Esc’ again and type the command below to save<br/>
+*  ```:wq!```<br/>
 17.	After done sequence header editing, proceed to submit all sequences in the folder *seq_foruse/* and *3.seq_tosubmit/DNAvaccineseq.pep* to the web-based tool.<br/>
 
 
