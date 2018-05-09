@@ -26,7 +26,8 @@
 9.	Translate each DNA fasta files on a [web-based translational tool](http://www.bioinformatics.org/sms2/translate.html) by copying and pasting the DNA sequences.<br/>
 → Opt for open reading fram (ORF) 1 for complete protein sequence translation and click the button ‘submit’, taking _4.fasta_ (HA protein) as an example.<br/>
 → Save the translated result as swinefluH1N1_segment4_HA.pep in  seq_tosubmit/ folder.<br/>
-*Table 1. Naming format of the file after sequence translation*<br/>
+
+**Table 1. Naming format of the file after sequence translation**<br/>
 
 |DNA fasta files|Protein sequence file (.pep)|
 |---|---|
