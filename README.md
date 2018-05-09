@@ -31,7 +31,10 @@ Contents:<br/>
 
 **Part II**<br/>
 Folder: 2.data_preprocess - A working folder to put all input / output files that are related to data preprocessing part<br/>
-Manual to follow: 'Data Pre-processing Manual.md' 
+Manual to follow: 'Data Pre-processing Manual.md'<br/>
+Contents:<br/>
+1. R project<br/>
+2. Python script - to open on Jupyter Notebook
 
 **Part III**<br/>
 Folder: 3.seq_tosubmit - A placeholder and also a working folder to put all files that are ready to be uploaded to the web-based tool
