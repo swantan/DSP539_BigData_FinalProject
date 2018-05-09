@@ -1,49 +1,54 @@
 # Manual for Data Pre-processing
 
-```mkdir 2.data_preprocess``` 
-→ create R project and Python script in your current working directory 
-→ ```cp H1N1_swineIAV.FASTA H1N1_swineIAV.XLS``` to this newly created folder
+```mkdir 2.data_preprocess```<br/> 
+→ create R project (with dataset, scrips, output folders) and Python script in your current working directory<br/> 
+→ ```cp 1.dataset/H1N1_swineIAV.FASTA 1.dataset/H1N1_swineIAV.XLS 2.data_preprocess/```
 
-mkdir 3.seq_tosubmit → put DNAvaccineseq.pep, vaccine_epitopes_classI.txt, vaccine_epitopes_classII.txt
+```mkdir 3.seq_tosubmit```<br/> 
+→ ```cp 1.dataset/DNAvaccineseq.pep 1.dataset/vaccine_epitopes_classI.txt 1.dataset/vaccine_epitopes_classII.txt 3.seq_tosubmit/```
 
-```cd 2.data_preprocess```
-Pre-processing of nucleotide sequence data
-1.	To check how’s the sequence file look like
-head H1N1_swineIAV.FASTA
-2.	To check the total number of sequences provided
-grep ">" H1N1_swineIAV.FASTA -c
-3.	To check sequence duplication by extracting header of each sequences and load the output header information into R
-grep ">" H1N1_swineIAV.FASTA > header_ H1N1_swineIAV.csv
-cp header_H1N1_swineIAV.csv H1N1_swineIAV_analysis/dataset/
-4.	R script – to check duplicates. There are 72 complete genome of H1N1 swine flu (each possess 8 protein segments, i.e. complete genome). Any strains that more than 8 count means there are duplicates, if less than 8 meaning the particular strain is of partial genome.
-cp H1N1_swineIAV_analysis/output/proteinsegment.txt ./ 
-5.	Since we are looking for full genome strain, we can determine that we are considering all 576 sequences.
-6.	Next is to proceed to extract all 576 sequences to 8 separate files according to their protein segments by using Python.
-7.	Gather all sequences that needed to be translated
-mkdir ../seq_tosubmit/totranslate
-mv *.fasta ../seq_tosubmit/totranslate
-8.	Translate each DNA fasta files on a web-based translational tool (http://www.bioinformatics.org/sms2/translate.html) by copying and pasting the DNA sequences. Opt for open reading fram (ORF) 1 for complete protein sequence translation and click the button ‘submit’, taking 4.fasta (HA protein) as an example. Save the translated result as swinefluH1N1_segment4_HA.pep in  seq_tosubmit/ folder.
-Table 1. Naming format of the file after sequence translation.
-DNA fasta files	Protein sequence file (.pep)
-1.fasta	swinefluH1N1_segment1_PB2.pep
-2.fasta	swinefluH1N1_segment2_PB1.pep
-3.fasta	swinefluH1N1_segment3_PA.pep
-4.fasta	swinefluH1N1_segment4_HA.pep
-5.fasta	swinefluH1N1_segment5_NP.pep
-6.fasta	swinefluH1N1_segment6_NA.pep
-7.fasta	swinefluH1N1_segment7_M.pep
-8.fasta	swinefluH1N1_segment8_NS.pep
+```cd 2.data_preprocess```<br/>
 
-9.	To remove stop codons ‘*’ and before doing so, screen through the file by searching ‘*’. You are expected to have a total of 72 ‘*’ (one stop codon for one sequence in a .pep file) but if more than 72 meaning there are some sequences that are not chosen from the best ORF. Screen through every sequences in the file and inspect manually for sequences that have more than one stop codons ‘*’, then choose other reading frame for the particular sequences and/or blast its nucleotide sequences against the respective amino acid sequences to obtain only the coding region (CDS).
-Take note especially for this sequence: ‘gb:MF116358’ (A/swine/Kansas/A01378027/2017)
-Chose reading frame 3 
->rf 3 gb:MF116358|Organism:Influenza A virus (A/swine/Kansas/A01378027/2017(H1N1))|Strain Name:A/swine/Kansas/A01378027/2017|Segment:4|Subtype:H1N1|Host:Swine QKQGKTKATKMKAILVVLLYTFTTANADTLCIGYHANNSTDTVDTVLEKNVTVTHSVNLL EDKHNGKLCKLRGVAPLHLGKCNIAGWILGNPECESLSTASSWSYIVETSNSDNGTCYPG DFINYEELREQLSSVSSFERFEIFPKTSSWPNHDSNKGVTAACPHAGAKSFYKNLIWLVK KGNSYPKLNQSYINDKGKKVLVLWGIHHPSTTADQQSLYQNADAYVFVGTSRYSKKFKPE IATRPKVRDQEGRMNYYWTLVEPGDKITFEATGNLVVPRYAFTMERNAGSGIIISDTPVH DCNTTCQTPEGAINTSLPFQNIHPITIGKCPKYVKSTKLRLATGLRNVPSIQSRGLFGAI AGFIEGGWTGMVDGWYGYHHQNEQGSGYAADLKSTQNAIDKITNKVNSVIEKMNTQFTAV GKEFNHLEKRIENLNKKVDDGFLDIWTYNAELLVLLENERTLDYHDSNVKNLYEKVRNQL KNNAKEIGNGCFEFYHKCDNTCMESVKNGTYDYPKYSEEAKLNREKIDGVKLESTRIYQI LAIYSTVASSLVLVVSLGAISFWMCSNGSLQCRICI*H*DFR
+**Pre-processing of nucleotide sequence data**<br/>
+1.	To check how’s the sequence file look like<br/>
+```head H1N1_swineIAV.FASTA```<br/>
+2.	To check the total number of sequences provided<br/>
+```grep ">" H1N1_swineIAV.FASTA -c```<br/>
+3.	To check sequence duplication by extracting header of each sequences and load the output header information into R<br/>
+```grep ">" H1N1_swineIAV.FASTA > header_ H1N1_swineIAV.csv```<br/>
+```cp header_H1N1_swineIAV.csv H1N1_swineIAV_preanalysis/dataset/```<br/>
+4.	R script – to check duplicates. There are 72 complete genome of H1N1 swine flu (each possess 8 protein segments, i.e. complete genome). Any strains that more than 8 count means there are duplicates, if less than 8 meaning the particular strain is of partial genome.<br/>
+```cp H1N1_swineIAV_analysis/output/proteinsegment.txt ./```<br/> 
+5.	Since we are looking for full genome strain, we can determine that we are considering all 576 sequences.<br/>
+6.	Next is to proceed to extract all 576 sequences to 8 separate files according to their protein segments by using Python.<br/>
+7.	Gather all sequences that needed to be translated<br/>
+```mkdir ../seq_tosubmit/totranslate```<br/>
+```mv *.fasta ../seq_tosubmit/totranslate```<br/>
+8.	Translate each DNA fasta files on a web-based translational tool [GitHub](http://www.bioinformatics.org/sms2/translate.html) by copying and pasting the DNA sequences.<br/>
+→ Opt for open reading fram (ORF) 1 for complete protein sequence translation and click the button ‘submit’, taking _4.fasta_ (HA protein) as an example.<br/>
+→ Save the translated result as swinefluH1N1_segment4_HA.pep in  seq_tosubmit/ folder.<br/>
+*Table 1. Naming format of the file after sequence translation*<br/>
+DNA fasta files | Protein sequence file (.pep) |
+----------------| ---------------------------- |
+1.fasta | swinefluH1N1_segment1_PB2.pep
+2.fasta | swinefluH1N1_segment2_PB1.pep
+3.fasta | swinefluH1N1_segment3_PA.pep
+4.fasta | swinefluH1N1_segment4_HA.pep
+5.fasta | swinefluH1N1_segment5_NP.pep
+6.fasta | swinefluH1N1_segment6_NA.pep
+7.fasta | swinefluH1N1_segment7_M.pep
+8.fasta | swinefluH1N1_segment8_NS.pep
 
-and also perform blastx (https://blast.ncbi.nlm.nih.gov/Blast.cgi?PROGRAM=blastx&PAGE_TYPE=BlastSearch&LINK_LOC=blasthome) to be certain of the sequence CDS (screenshot)
- 
-which is started with ‘MKAILVVLLYTF’ and ended with ‘SLQCRICI’.
-Then, make necessary edits to the ‘problematic’ sequence, i.e. trim away ‘QKQGKTKATK’ and ‘H*DFR’
-Showing before and after (see attached screenshots) removing * in ‘swinefluH1N1_segment4_HA.pep’
+9.	To remove stop codons ‘*’ and before doing so, screen through the file by searching ‘*’. You are expected to have a total of 72 ‘*’ (one stop codon for one sequence in a .pep file) but if more than 72 meaning there are some sequences that are not chosen from the best ORF. Screen through every sequences in the file and inspect manually for sequences that have more than one stop codons ‘*’, then choose other reading frame for the particular sequences and/or blast its nucleotide sequences against the respective amino acid sequences to obtain only the coding region (CDS).<br/>
+Take note especially for this sequence: _‘gb:MF116358’ (A/swine/Kansas/A01378027/2017)_<br/>
+Chose reading frame 3<br/> 
+>\>rf 3 gb:MF116358|Organism:Influenza A virus (A/swine/Kansas/A01378027/2017(H1N1))|Strain Name:A/swine/Kansas/A01378027/2017|Segment:4|Subtype:H1N1|Host:Swine QKQGKTKATKMKAILVVLLYTFTTANADTLCIGYHANNSTDTVDTVLEKNVTVTHSVNLL EDKHNGKLCKLRGVAPLHLGKCNIAGWILGNPECESLSTASSWSYIVETSNSDNGTCYPG DFINYEELREQLSSVSSFERFEIFPKTSSWPNHDSNKGVTAACPHAGAKSFYKNLIWLVK KGNSYPKLNQSYINDKGKKVLVLWGIHHPSTTADQQSLYQNADAYVFVGTSRYSKKFKPE IATRPKVRDQEGRMNYYWTLVEPGDKITFEATGNLVVPRYAFTMERNAGSGIIISDTPVH DCNTTCQTPEGAINTSLPFQNIHPITIGKCPKYVKSTKLRLATGLRNVPSIQSRGLFGAI AGFIEGGWTGMVDGWYGYHHQNEQGSGYAADLKSTQNAIDKITNKVNSVIEKMNTQFTAV GKEFNHLEKRIENLNKKVDDGFLDIWTYNAELLVLLENERTLDYHDSNVKNLYEKVRNQL KNNAKEIGNGCFEFYHKCDNTCMESVKNGTYDYPKYSEEAKLNREKIDGVKLESTRIYQI LAIYSTVASSLVLVVSLGAISFWMCSNGSLQCRICI*H*DFR<br/>
+
+and also perform blastx [GitHub](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PROGRAM=blastx&PAGE_TYPE=BlastSearch&LINK_LOC=blasthome) to be certain of the sequence CDS (screenshot)<br/>
+![GitHub Logo](/images/logo.png) 
+which is started with ‘MKAILVVLLYTF’ and ended with ‘SLQCRICI’.<br/>
+Then, make necessary edits to the ‘problematic’ sequence, i.e. trim away ‘QKQGKTKATK’ and ‘H*DFR’<br/>
+Showing before and after (see attached screenshots) removing * in ‘swinefluH1N1_segment4_HA.pep’<br/>
 Before
  
 
