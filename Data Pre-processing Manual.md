@@ -63,7 +63,7 @@
 •	Sequence headers should only contain two special characters, ‘/’ and ‘-’. Other characters such as ‘:’, ‘.’, ‘|’, ‘*’ etc will throw an error.<br/>
 •	Sequence header should be kept short.<br/>
 14.	Now, to further edit sequence headers, loop through all 8 file to make the following modification, i.e. shorten sequence header:<br/>
-```cd ../seq_tosubmit/```
+```cd ../seq_tosubmit/```<br/>
 ```{awk }
 for i in 1 2 3 4 5 6 7 8; 
 do for j in PB2 PB1 PA HA NP NA M NS;
@@ -71,23 +71,23 @@ do cat swinefluH1N1\_segment$i\_$j.pep | awk '/^>/{split($0,a,"|"); print a[1]"|
 > swinefluH1N1\_segment$i\_$j\_v2.pep; 
 done; done
 ```
-```mkdir seq_foruse```
-```mv swinefluH1N1_segment1_PB2_v2.pep swinefluH1N1_segment2_PB1_v2.pep swinefluH1N1_segment3_PA_v2.pep swinefluH1N1_segment4_HA_v2.pep swinefluH1N1_segment5_NP_v2.pep swinefluH1N1_segment6_NA_v2.pep swinefluH1N1_segment7_M_v2.pep swinefluH1N1_segment8_NS_v2.pep seq_foruse/```
-```rm *v2.pep```
+```mkdir seq_foruse```<br/>
+```mv swinefluH1N1_segment1_PB2_v2.pep swinefluH1N1_segment2_PB1_v2.pep swinefluH1N1_segment3_PA_v2.pep swinefluH1N1_segment4_HA_v2.pep swinefluH1N1_segment5_NP_v2.pep swinefluH1N1_segment6_NA_v2.pep swinefluH1N1_segment7_M_v2.pep swinefluH1N1_segment8_NS_v2.pep seq_foruse/```<br/>
+```rm *v2.pep```<br/>
 15.	```cd seq_foruse/```<br/>
 16.	Manually further edit sequence header using vi editor<br/>
-```vi <filename>```
+```vi <filename>```<br/>
 For example: ```vi swinefluH1N1_segment4_HA_v2.pep```<br/>
 Hit ‘Esc’ to enter coding mode everytime (do not hit ‘I’) and things to edit are as below:<br/>
->:%s/rf 1 //g
->:%s/rf 3 //g
->:%s/Strain Name://g
->:%s/:/_/g
->:%s/ //g
->:%s/\//_/g
->:%s/|/-/g
+```:%s/rf 1 //g```<br/>
+```:%s/rf 3 //g```<br/>
+```:%s/Strain Name://g```<br/>
+```:%s/:/_/g```<br/>
+```:%s/ //g```<br/>
+```:%s/\//_/g```<br/>
+```:%s/|/-/g```<br/>
 After done all the above, hit ‘Esc’ again and type the command below to save<br/>
->:wq!
+```:wq!```<br/>
 17.	After done sequence header editing, proceed to submit all sequences in the folder *seq_foruse/* and *3.seq_tosubmit/DNAvaccineseq.pep* to the web-based tool.<br/>
 
 
