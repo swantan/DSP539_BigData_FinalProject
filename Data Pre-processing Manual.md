@@ -35,16 +35,16 @@
 |   |   |   |   |   |
 
 
-| DNA fasta files | Protein sequence file (.pep) |<br/>
-| --- | --- |<br/>
-| 1.fasta | swinefluH1N1_segment1_PB2.pep |<br/>
-| 2.fasta | swinefluH1N1_segment2_PB1.pep |<br/>
-| 3.fasta | swinefluH1N1_segment3_PA.pep |<br/>
-| 4.fasta | swinefluH1N1_segment4_HA.pep |<br/>
-| 5.fasta | swinefluH1N1_segment5_NP.pep |<br/>
-| 6.fasta | swinefluH1N1_segment6_NA.pep |<br/>
-| 7.fasta | swinefluH1N1_segment7_M.pep |<br/>
-| 8.fasta | swinefluH1N1_segment8_NS.pep |<br/>
+|DNA fasta files|Protein sequence file (.pep)|<br/>
+|---|---|<br/>
+|1.fasta|swinefluH1N1_segment1_PB2.pep|<br/>
+|2.fasta|swinefluH1N1_segment2_PB1.pep|<br/>
+|3.fasta|swinefluH1N1_segment3_PA.pep|<br/>
+|4.fasta|swinefluH1N1_segment4_HA.pep|<br/>
+|5.fasta|swinefluH1N1_segment5_NP.pep|<br/>
+|6.fasta|swinefluH1N1_segment6_NA.pep|<br/>
+|7.fasta|swinefluH1N1_segment7_M.pep|<br/>
+|8.fasta|swinefluH1N1_segment8_NS.pep|<br/>
 
 10.	To remove stop codons ‘\*’ and before doing so, screen through the file by searching ‘\*’. You are expected to have a total of 72 ‘\*’ (one stop codon for one sequence in a .pep file) but if more than 72 meaning there are some sequences that are not chosen from the best ORF. Screen through every sequences in the file and inspect manually for sequences that have more than one stop codons ‘\*’, then choose other reading frame for the particular sequences and/or blast its nucleotide sequences against the respective amino acid sequences to obtain only the coding region (CDS).<br/>
 * a. Take note especially for this sequence: _‘gb:MF116358’ (A/swine/Kansas/A01378027/2017)_<br/>
