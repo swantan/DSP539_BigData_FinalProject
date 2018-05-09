@@ -1,0 +1,825 @@
+---
+title: "Swine Flu Epitope Analysis"
+author: "Tan Swan"
+date: "4/29/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, fig.width = 12, fig.height = 8, fig.path = 'figures/')
+```
+
+## Project Background
+There is a study on swine vaccination and the project collaborators need to produce an inactivated vaccine to immunize pigs. Prior to do so, the pigs have to be challenged with a virus strain in order to test the efficacy of experimental inactivated vaccine. 
+
+Taking the previous published swine DNA vaccine as reference, the collaborator intended to know which circulating swine influenza A virus (IAV) is suitable to serve as the challenge strain.
+
+## Post-Analysis Goals
+1. To screen H1N1 IAV sequences (provided by the collaborator) against the epitopes in the DNA vaccine to find good matches using two approaches: Epitope Content Comparison (EpiCC) and JanusMatrix (JMX).
+
+2. Rank the viruses to select top matches to be candidate for the challenge strain.
+
+
+#### Pre-checkpoint - Libraries to include
+```{r library, echo=TRUE}
+library(tidyverse)
+library(gridExtra)
+library(ggplot2)
+library(plotly)
+library(knitr)
+```
+
+## Part I
+## About EpiCC 
+Epitope Content Comparison (EpiCC) - A web-based computational method that facilitates pairwise comparison of protein sequences based on immunological property, i.e. T cell epitope content, rather than sequence identity, and evaluated its ability to classify swine influenza A virus (IAV) strain relatedness to estimate cross-protective potential of a vaccine strain for circulating viruses (Gutiérrez et. al, 2017).
+
+### Aim
+To identify strains that have highest epitope content relatedness to the reference vaccine strain of MHC Class I/II (VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI/VACCINE_EPITOPES_CLASSII-NTC8682-ERNA41H-1SOJII) across H1N1 Swine IAV whole genome, i.e. a total of 8 protein segments/antigens.
+
+### Materials
+Output from EpiCC tool to process and analyze: 8 outfiles for MHC Class I and II respectively.
+
+### Methodology/ Working steps
+
+#### 1. Load EpiCC MHC Class I data and clean up unnecessary rows and columns
+
+```{r Load EpiCC Class I data and clean up unnecessary rows and columns}
+epicc_data_1_clsI <- read.csv("dataset/SWINEFLUH1N1_SEGMENT1_PB2_clsI_ALL_INFO.csv", header = FALSE, stringsAsFactors = FALSE, sep = ",")
+epicc_data_1_clsI <- epicc_data_1_clsI[-c(1:31),]
+colnames(epicc_data_1_clsI) <- epicc_data_1_clsI[1,]
+epicc_data_1_clsI <- epicc_data_1_clsI[-1,]
+
+#Segment2 - PB1
+epicc_data_2_clsI <- read.csv("dataset/SWINEFLUH1N1_SEGMENT2_PB1_clsI_ALL_INFO.csv", header = FALSE, stringsAsFactors = FALSE, sep = ",")
+epicc_data_2_clsI <- epicc_data_2_clsI[-c(1:31),]
+colnames(epicc_data_2_clsI) <- epicc_data_2_clsI[1,]
+epicc_data_2_clsI <- epicc_data_2_clsI[-1,]
+
+#Segment3 - PA
+epicc_data_3_clsI <- read.csv("dataset/SWINEFLUH1N1_SEGMENT3_PA_clsI_ALL_INFO.csv", header = FALSE, stringsAsFactors = FALSE, sep = ",")
+epicc_data_3_clsI <- epicc_data_3_clsI[-c(1:31),]
+colnames(epicc_data_3_clsI) <- epicc_data_3_clsI[1,]
+epicc_data_3_clsI <- epicc_data_3_clsI[-1,]
+
+#Segment4 - HA
+epicc_data_4_clsI <- read.csv("dataset/SWINEFLUH1N1_SEGMENT4_HA_clsI_ALL_INFO.csv", header = FALSE, stringsAsFactors = FALSE, sep = ",")
+epicc_data_4_clsI <- epicc_data_4_clsI[-c(1:31),]
+colnames(epicc_data_4_clsI) <- epicc_data_4_clsI[1,]
+epicc_data_4_clsI <- epicc_data_4_clsI[-1,]
+
+#Segment5 - NP
+epicc_data_5_clsI <- read.csv("dataset/SWINEFLUH1N1_SEGMENT5_NP_clsI_ALL_INFO.csv", header = FALSE, stringsAsFactors = FALSE, sep = ",")
+epicc_data_5_clsI <- epicc_data_5_clsI[-c(1:31),]
+colnames(epicc_data_5_clsI) <- epicc_data_5_clsI[1,]
+epicc_data_5_clsI <- epicc_data_5_clsI[-1,]
+
+#Segment6 - NA
+epicc_data_6_clsI <- read.csv("dataset/SWINEFLUH1N1_SEGMENT6_NA_clsI_ALL_INFO.csv", header = FALSE, stringsAsFactors = FALSE, sep = ",")
+epicc_data_6_clsI <- epicc_data_6_clsI[-c(1:31),]
+colnames(epicc_data_6_clsI) <- epicc_data_6_clsI[1,]
+epicc_data_6_clsI <- epicc_data_6_clsI[-1,]
+
+#Segment7 - M
+epicc_data_7_clsI <- read.csv("dataset/SWINEFLUH1N1_SEGMENT7_M_clsI_ALL_INFO.csv", header = FALSE, stringsAsFactors = FALSE, sep = ",")
+epicc_data_7_clsI <- epicc_data_7_clsI[-c(1:31),]
+colnames(epicc_data_7_clsI) <- epicc_data_7_clsI[1,]
+epicc_data_7_clsI <- epicc_data_7_clsI[-1,]
+
+#Segment8 - NS
+epicc_data_8_clsI <- read.csv("dataset/SWINEFLUH1N1_SEGMENT8_NS_clsI_ALL_INFO.csv", header = FALSE, stringsAsFactors = FALSE, sep = ",")
+epicc_data_8_clsI <- epicc_data_8_clsI[-c(1:31),]
+colnames(epicc_data_8_clsI) <- epicc_data_8_clsI[1,]
+epicc_data_8_clsI <- epicc_data_8_clsI[-1,]
+```
+
+##### Quick view of the processed data from one of the protein segments
+```{r Quick view of the processed data from one of the protein segments, echo = TRUE}
+head(colnames(epicc_data_1_clsI))
+nrow(epicc_data_1_clsI)
+ncol(epicc_data_1_clsI)
+```
+
+```{r Transform wide form to long form data, perform sorting and extracting top 10 EpiCC score from each protein}
+#PB2
+#epicc_data_1_clsI$`GB_KY888027-A_SWINE_KANSAS_A01378019_2017-SEGMENT_1`
+#epicc_data_1_clsI$`VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI`
+epicc_data_1_clsI_long <- epicc_data_1_clsI %>% 
+  gather(key = strains, value = PB2_score, 
+         `GB_KY888027-A_SWINE_KANSAS_A01378019_2017-SEGMENT_1`:`VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI`) %>%
+  select(strains,PB2_score) %>% mutate(header = strains) %>% 
+  separate(header, into = c("ID", "Sequence", "Segment"), sep = "-", extra = "merge")
+epicc_data_1_clsI_long$PB2_score <- as.numeric(epicc_data_1_clsI_long$PB2_score)
+epicc_data_1_clsI_sort <- epicc_data_1_clsI_long %>% filter(!Sequence == "NTC8684") %>%
+  arrange(Sequence) %>% arrange(desc(PB2_score))
+epicc_data_1_clsI_top10 <- head(epicc_data_1_clsI_sort, 10)
+epicc_data_1_clsI_top10 <- epicc_data_1_clsI_top10 %>% select(Sequence, Segment)
+
+#PB1
+#epicc_data_2_clsI$`GB_KY888028-A_SWINE_KANSAS_A01378019_2017-SEGMENT_2`
+#epicc_data_2_clsI$`VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI`
+epicc_data_2_clsI_long <- epicc_data_2_clsI %>% 
+  gather(key = strains, value = PB1_score, 
+         `GB_KY888028-A_SWINE_KANSAS_A01378019_2017-SEGMENT_2`:`VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI`) %>%
+  select(strains,PB1_score) %>% mutate(header = strains) %>% 
+  separate(header, into = c("ID", "Sequence", "Segment"), sep = "-", extra = "merge")
+epicc_data_2_clsI_long$PB1_score <- as.numeric(epicc_data_2_clsI_long$PB1_score)
+epicc_data_2_clsI_sort <- epicc_data_2_clsI_long %>% filter(!Sequence == "NTC8684") %>%
+  arrange(Sequence) %>% arrange(desc(PB1_score))
+epicc_data_2_clsI_top10 <- head(epicc_data_2_clsI_sort, 10)
+epicc_data_2_clsI_top10 <- epicc_data_2_clsI_top10 %>% select(Sequence, Segment)
+
+#PA
+#epicc_data_3_clsI$`GB_KY888029-A_SWINE_KANSAS_A01378019_2017-SEGMENT_3`
+#epicc_data_3_clsI$`VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI`
+epicc_data_3_clsI_long <- epicc_data_3_clsI %>% 
+  gather(key = strains, value = PA_score, 
+         `GB_KY888029-A_SWINE_KANSAS_A01378019_2017-SEGMENT_3`:`VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI`) %>%
+  select(strains,PA_score) %>% mutate(header = strains) %>% 
+  separate(header, into = c("ID", "Sequence", "Segment"), sep = "-", extra = "merge")
+epicc_data_3_clsI_long$PA_score <- as.numeric(epicc_data_3_clsI_long$PA_score)
+epicc_data_3_clsI_sort <- epicc_data_3_clsI_long %>% filter(!Sequence == "NTC8684") %>%
+  arrange(Sequence) %>% arrange(desc(PA_score))
+epicc_data_3_clsI_top10 <- head(epicc_data_3_clsI_sort, 10)
+epicc_data_3_clsI_top10 <- epicc_data_3_clsI_top10 %>% select(Sequence, Segment)
+
+#HA
+#epicc_data_4_clsI$`GB_KY522877-A_SWINE_NORTH_CAROLINA_A01672011_2017-SEGMENT_4`
+#epicc_data_4_clsI$`VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI`
+epicc_data_4_clsI_long <- epicc_data_4_clsI %>% 
+  gather(key = strains, value = HA_score, 
+         `GB_KY522877-A_SWINE_NORTH_CAROLINA_A01672011_2017-SEGMENT_4`:`VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI`) %>%
+  select(strains,HA_score) %>% mutate(header = strains) %>% 
+  separate(header, into = c("ID", "Sequence", "Segment"), sep = "-", extra = "merge")
+epicc_data_4_clsI_long$HA_score <- as.numeric(epicc_data_4_clsI_long$HA_score)
+epicc_data_4_clsI_sort <- epicc_data_4_clsI_long %>% filter(!Sequence == "NTC8684") %>%
+  arrange(Sequence) %>% arrange(desc(HA_score))
+epicc_data_4_clsI_top10 <- head(epicc_data_4_clsI_sort, 10)
+epicc_data_4_clsI_top10 <- epicc_data_4_clsI_top10 %>% select(Sequence, Segment)
+
+#NP
+#epicc_data_5_clsI$`GB_KY888031-A_SWINE_KANSAS_A01378019_2017-SEGMENT_5`
+#epicc_data_5_clsI$`VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI`
+epicc_data_5_clsI_long <- epicc_data_5_clsI %>% 
+  gather(key = strains, value = NP_score, 
+         `GB_KY888031-A_SWINE_KANSAS_A01378019_2017-SEGMENT_5`:`VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI`) %>%
+  select(strains,NP_score) %>% mutate(header = strains) %>% 
+  separate(header, into = c("ID", "Sequence", "Segment"), sep = "-", extra = "merge")
+epicc_data_5_clsI_long$NP_score <- as.numeric(epicc_data_5_clsI_long$NP_score)
+epicc_data_5_clsI_sort <- epicc_data_5_clsI_long %>% filter(!Sequence == "NTC8684") %>%
+  arrange(Sequence) %>% arrange(desc(NP_score))
+epicc_data_5_clsI_top10 <- head(epicc_data_5_clsI_sort, 10)
+epicc_data_5_clsI_top10 <- epicc_data_5_clsI_top10 %>% select(Sequence, Segment)
+
+#NA
+#epicc_data_6_clsI$`GB_KY522878-A_SWINE_NORTH_CAROLINA_A01672011_2017-SEGMENT_6`
+#epicc_data_6_clsI$`VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI`
+epicc_data_6_clsI_long <- epicc_data_6_clsI %>% 
+  gather(key = strains, value = NA_score, 
+         `GB_KY522878-A_SWINE_NORTH_CAROLINA_A01672011_2017-SEGMENT_6`:`VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI`) %>%
+  select(strains,NA_score) %>% mutate(header = strains) %>% 
+  separate(header, into = c("ID", "Sequence", "Segment"), sep = "-", extra = "merge")
+epicc_data_6_clsI_long$NA_score <- as.numeric(epicc_data_6_clsI_long$NA_score)
+epicc_data_6_clsI_sort <- epicc_data_6_clsI_long %>% filter(!Sequence == "NTC8684") %>%
+  arrange(Sequence) %>% arrange(desc(NA_score))
+epicc_data_6_clsI_top10 <- head(epicc_data_6_clsI_sort, 10)
+epicc_data_6_clsI_top10 <- epicc_data_6_clsI_top10 %>% select(Sequence, Segment)
+
+#M
+#epicc_data_7_clsI$`GB_KY888033-A_SWINE_KANSAS_A01378019_2017-SEGMENT_7`
+#epicc_data_7_clsI$`VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI`
+epicc_data_7_clsI_long <- epicc_data_7_clsI %>% 
+  gather(key = strains, value = M_score, 
+         `GB_KY888033-A_SWINE_KANSAS_A01378019_2017-SEGMENT_7`:`VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI`) %>%
+  select(strains,M_score) %>% mutate(header = strains) %>% 
+  separate(header, into = c("ID", "Sequence", "Segment"), sep = "-", extra = "merge")
+epicc_data_7_clsI_long$M_score <- as.numeric(epicc_data_7_clsI_long$M_score)
+epicc_data_7_clsI_sort <- epicc_data_7_clsI_long %>% filter(!Sequence == "NTC8684") %>%
+  #select(Sequence, M_score, Segment, Subtype) %>%
+  arrange(Sequence) %>% arrange(desc(M_score))
+epicc_data_7_clsI_top10 <- head(epicc_data_7_clsI_sort, 10)
+epicc_data_7_clsI_top10 <- epicc_data_7_clsI_top10 %>% select(Sequence, Segment)
+
+#NS
+#epicc_data_8_clsI$`GB_KY888034-A_SWINE_KANSAS_A01378019_2017-SEGMENT_8`
+#epicc_data_8_clsI$`VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI`
+epicc_data_8_clsI_long <- epicc_data_8_clsI %>% 
+  gather(key = strains, value = NS_score, 
+         `GB_KY888034-A_SWINE_KANSAS_A01378019_2017-SEGMENT_8`:`VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI`) %>%
+  select(strains,NS_score) %>% mutate(header = strains) %>% 
+  separate(header, into = c("ID", "Sequence", "Segment"), sep = "-", extra = "merge")
+epicc_data_8_clsI_long$NS_score <- as.numeric(epicc_data_8_clsI_long$NS_score)
+epicc_data_8_clsI_sort <- epicc_data_8_clsI_long %>% filter(!Sequence == "NTC8684") %>%
+  arrange(Sequence) %>% arrange(desc(NS_score))
+epicc_data_8_clsI_top10 <- head(epicc_data_8_clsI_sort, 10)
+epicc_data_8_clsI_top10 <- epicc_data_8_clsI_top10 %>% select(Sequence, Segment)
+```
+
+#### 2. Transform data from wide form to long form, perform sorting and extracting top 10 EpiCC score from each protein
+
+##### Showing a working example from one of the protein segments: PB2
+```{r Quick view of one of the processed data, echo = TRUE}
+epicc_data_1_clsI_long <- epicc_data_1_clsI %>% 
+  gather(key = strains, value = PB2_score, 
+         `GB_KY888027-A_SWINE_KANSAS_A01378019_2017-SEGMENT_1`:`VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI`) %>% 
+  select(strains,PB2_score) %>% mutate(header = strains) %>% 
+  separate(header, into = c("ID", "Sequence", "Segment"), sep = "-", extra = "merge")
+epicc_data_1_clsI_long$PB2_score <- as.numeric(epicc_data_1_clsI_long$PB2_score)
+epicc_data_1_clsI_sort <- epicc_data_1_clsI_long %>% filter(!Sequence == "NTC8684") %>%
+  arrange(Sequence) %>% arrange(desc(PB2_score))
+epicc_data_1_clsI_top10 <- head(epicc_data_1_clsI_sort, 10)
+epicc_data_1_clsI_top10 <- epicc_data_1_clsI_top10 %>% select(Sequence, Segment)
+epicc_data_1_clsI_top10
+```
+
+#### 2a. Exploratory analysis of H1N1 Swine IAV dataset
+```{r Area distribution}
+metadata_1 <- epicc_data_1_clsI_long %>% select(Sequence) %>% filter(!Sequence == "NTC8684") %>%
+  separate(Sequence, into = c("FluType", "Host", "Area", "FluID", "Year"), sep = "_", extra = "merge")
+x <- which(metadata_1$FluID == "CAROLINA")
+metadata_1$Area[c(7,17,38,59,69)] <- "NORTH CAROLINA"
+metadata_1$FluID[c(7,17,38,59,69)] <- c("A01672011", "A01672751", "A02214775", "A01785281", "A01785282")
+metadata_1$Year[c(7,17,38,59,69)] <- "2017"
+#subtype_info <- metadata_1 %>% filter(Subtype == "Challenge") %>% group_by(Subtype) %>% tally()
+area_info <- metadata_1 %>% group_by(Area) %>% tally() %>% arrange(desc(n))
+
+#area info pie chart
+plot_ly(area_info, labels = ~Area, values = ~n, type = 'pie',textposition = 'inside',
+        domain = list(x = c(0, 0), y = c(0, 0)), textinfo = 'label+percent',
+        rotation = -125, direction = "clockwise", 
+        textfont = list(color = '#000000', size = 16)) %>%
+  layout(title = 'Area Distribution of Swine IAV Dataset', xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE), yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE, tickformat = "%"))
+```
+Figure 1.1 | The pie chart shows area distribution of swine IAV dataset. More than 30% of swine IAV strains are from Iowa. Second abundance being OHIO, followed by Illinois, Missouri and North Carolina.
+
+ 
+```{r Combine top 10 EpiCC score from each protein}
+epicc_data_clsI_top10_all <- rbind.data.frame(epicc_data_1_clsI_top10, epicc_data_2_clsI_top10,
+                                               epicc_data_3_clsI_top10, epicc_data_4_clsI_top10,
+                                               epicc_data_5_clsI_top10, epicc_data_6_clsI_top10,
+                                               epicc_data_7_clsI_top10, epicc_data_8_clsI_top10)
+```
+
+#### 3. Combine top 10 EpiCC score of each protein
+
+##### MHC Class I top 10 data preview
+```{r Preview 3, echo = TRUE}
+head(epicc_data_clsI_top10_all)
+tail(epicc_data_clsI_top10_all)
+unique(epicc_data_clsI_top10_all$Sequence)
+unique(epicc_data_clsI_top10_all$Segment)
+```
+The numbering in each segment stands for type of protein encoded in flu genome. 
+1:PB2, 2: PB1, 3:PA, 4:HA, 5:NP, 6:NA, 7:M, 8:NS
+
+#### 4. Identify top occuring strains
+```{r To identify top occuring strains, echo = TRUE}
+most_occurence_strain_clsI <- epicc_data_clsI_top10_all %>% group_by(Sequence) %>% summarise(count = n()) %>% arrange(desc(count)) %>% filter(count >= 3)
+```
+
+```{r To identify the most occuring strains, echo = TRUE}
+max(most_occurence_strain_clsI$count)
+most_occurence_strain_clsI
+```
+Maximum frequency = 5 out of 8 (if the EpiCC score of a strain remain in the top 10 list of all proteins, then it will have frequency of 8). In this case, since the maximum frequency is only 5, this means that these strains are only found in the top 10 list of 5 proteins. Here, we considered strains that of frequency between 3 - 5. 
+
+#### 5. Repeat steps 1 - 4 for MHC Class II data
+
+```{r Load EpiCC Class II data}
+#load EpiCC data - Class II
+#Segment1 - PB2
+epicc_data_1_clsII <- read.csv("dataset/SWINEFLUH1N1_SEGMENT1_PB2_clsII_ALL_INFO.csv", header = FALSE, stringsAsFactors = FALSE, sep = ",")
+epicc_data_1_clsII <- epicc_data_1_clsII[-c(1:31),]
+colnames(epicc_data_1_clsII) <- epicc_data_1_clsII[1,]
+epicc_data_1_clsII <- epicc_data_1_clsII[-1,]
+
+#Segment2 - PB1
+epicc_data_2_clsII <- read.csv("dataset/SWINEFLUH1N1_SEGMENT2_PB1_clsII_ALL_INFO.csv", header = FALSE, stringsAsFactors = FALSE, sep = ",")
+epicc_data_2_clsII <- epicc_data_2_clsII[-c(1:31),]
+colnames(epicc_data_2_clsII) <- epicc_data_2_clsII[1,]
+epicc_data_2_clsII <- epicc_data_2_clsII[-1,]
+
+#Segment3 - PA
+epicc_data_3_clsII <- read.csv("dataset/SWINEFLUH1N1_SEGMENT3_PA_clsII_ALL_INFO.csv", header = FALSE, stringsAsFactors = FALSE, sep = ",")
+epicc_data_3_clsII <- epicc_data_3_clsII[-c(1:31),]
+colnames(epicc_data_3_clsII) <- epicc_data_3_clsII[1,]
+epicc_data_3_clsII <- epicc_data_3_clsII[-1,]
+
+#Segment4 - HA
+epicc_data_4_clsII <- read.csv("dataset/SWINEFLUH1N1_SEGMENT4_HA_clsII_ALL_INFO.csv", header = FALSE, stringsAsFactors = FALSE, sep = ",")
+epicc_data_4_clsII <- epicc_data_4_clsII[-c(1:31),]
+colnames(epicc_data_4_clsII) <- epicc_data_4_clsII[1,]
+epicc_data_4_clsII <- epicc_data_4_clsII[-1,]
+
+#Segment5 - NP
+epicc_data_5_clsII <- read.csv("dataset/SWINEFLUH1N1_SEGMENT5_NP_clsII_ALL_INFO.csv", header = FALSE, stringsAsFactors = FALSE, sep = ",")
+epicc_data_5_clsII <- epicc_data_5_clsII[-c(1:31),]
+colnames(epicc_data_5_clsII) <- epicc_data_5_clsII[1,]
+epicc_data_5_clsII <- epicc_data_5_clsII[-1,]
+
+#Segment6 - NA
+epicc_data_6_clsII <- read.csv("dataset/SWINEFLUH1N1_SEGMENT6_NA_clsII_ALL_INFO.csv", header = FALSE, stringsAsFactors = FALSE, sep = ",")
+epicc_data_6_clsII <- epicc_data_6_clsII[-c(1:31),]
+colnames(epicc_data_6_clsII) <- epicc_data_6_clsII[1,]
+epicc_data_6_clsII <- epicc_data_6_clsII[-1,]
+
+#Segment7 - M
+epicc_data_7_clsII <- read.csv("dataset/SWINEFLUH1N1_SEGMENT7_M_clsII_ALL_INFO.csv", header = FALSE, stringsAsFactors = FALSE, sep = ",")
+epicc_data_7_clsII <- epicc_data_7_clsII[-c(1:31),]
+colnames(epicc_data_7_clsII) <- epicc_data_7_clsII[1,]
+epicc_data_7_clsII <- epicc_data_7_clsII[-1,]
+
+#Segment8 - NS
+epicc_data_8_clsII <- read.csv("dataset/SWINEFLUH1N1_SEGMENT8_NS_clsII_ALL_INFO.csv", header = FALSE, stringsAsFactors = FALSE, sep = ",")
+epicc_data_8_clsII <- epicc_data_8_clsII[-c(1:31),]
+colnames(epicc_data_8_clsII) <- epicc_data_8_clsII[1,]
+epicc_data_8_clsII <- epicc_data_8_clsII[-1,]
+
+#transform wide form data to long form data
+#PB2
+#epicc_data_1_clsII$`GB_KY888027-A_SWINE_KANSAS_A01378019_2017-SEGMENT_1`
+#epicc_data_1_clsII$`VACCINE_EPITOPES_CLASSII-NTC8682-ERNA41H-1SOJII`
+epicc_data_1_clsII_long <- epicc_data_1_clsII %>% 
+  gather(key = strains, value = PB2_score, 
+         `GB_KY888027-A_SWINE_KANSAS_A01378019_2017-SEGMENT_1`:`VACCINE_EPITOPES_CLASSII-NTC8682-ERNA41H-1SOJII`) %>%
+  select(strains,PB2_score) %>% mutate(header = strains) %>% 
+  separate(header, into = c("ID", "Sequence", "Segment"), sep = "-", extra = "merge")
+epicc_data_1_clsII_long$PB2_score <- as.numeric(epicc_data_1_clsII_long$PB2_score)
+epicc_data_1_clsII_sort <- epicc_data_1_clsII_long %>% filter(!Sequence == "NTC8682") %>%
+  arrange(Sequence) %>% arrange(desc(PB2_score))
+epicc_data_1_clsII_top10 <- head(epicc_data_1_clsII_sort, 10)
+epicc_data_1_clsII_top10 <- epicc_data_1_clsII_top10 %>% select(Sequence, Segment)
+
+#PB1
+#epicc_data_2_clsII$`GB_KY888028-A_SWINE_KANSAS_A01378019_2017-SEGMENT_2`
+#epicc_data_2_clsII$`VACCINE_EPITOPES_CLASSII-NTC8682-ERNA41H-1SOJII`
+epicc_data_2_clsII_long <- epicc_data_2_clsII %>% 
+  gather(key = strains, value = PB1_score, 
+         `GB_KY888028-A_SWINE_KANSAS_A01378019_2017-SEGMENT_2`:`VACCINE_EPITOPES_CLASSII-NTC8682-ERNA41H-1SOJII`) %>%
+  select(strains,PB1_score) %>% mutate(header = strains) %>% 
+  separate(header, into = c("ID", "Sequence", "Segment"), sep = "-", extra = "merge")
+epicc_data_2_clsII_long$PB1_score <- as.numeric(epicc_data_2_clsII_long$PB1_score)
+epicc_data_2_clsII_sort <- epicc_data_2_clsII_long %>% filter(!Sequence == "NTC8682") %>%
+  arrange(Sequence) %>% arrange(desc(PB1_score))
+epicc_data_2_clsII_top10 <- head(epicc_data_2_clsII_sort, 10)
+epicc_data_2_clsII_top10 <- epicc_data_2_clsII_top10 %>% select(Sequence, Segment)
+
+#PA
+#epicc_data_3_clsII$`GB_KY888029-A_SWINE_KANSAS_A01378019_2017-SEGMENT_3`
+#epicc_data_3_clsII$`VACCINE_EPITOPES_CLASSII-NTC8682-ERNA41H-1SOJII`
+epicc_data_3_clsII_long <- epicc_data_3_clsII %>% 
+  gather(key = strains, value = PA_score, 
+         `GB_KY888029-A_SWINE_KANSAS_A01378019_2017-SEGMENT_3`:`VACCINE_EPITOPES_CLASSII-NTC8682-ERNA41H-1SOJII`) %>%
+  select(strains,PA_score) %>% mutate(header = strains) %>% 
+  separate(header, into = c("ID", "Sequence", "Segment"), sep = "-", extra = "merge")
+epicc_data_3_clsII_long$PA_score <- as.numeric(epicc_data_3_clsII_long$PA_score)
+epicc_data_3_clsII_sort <- epicc_data_3_clsII_long %>% filter(!Sequence == "NTC8682") %>%
+  arrange(Sequence) %>% arrange(desc(PA_score))
+epicc_data_3_clsII_top10 <- head(epicc_data_3_clsII_sort, 10)
+epicc_data_3_clsII_top10 <- epicc_data_3_clsII_top10 %>% select(Sequence, Segment)
+
+#HA
+#epicc_data_4_clsII$`GB_KY522877-A_SWINE_NORTH_CAROLINA_A01672011_2017-SEGMENT_4`
+#epicc_data_4_clsII$`VACCINE_EPITOPES_CLASSII-NTC8682-ERNA41H-1SOJII`
+epicc_data_4_clsII_long <- epicc_data_4_clsII %>% 
+  gather(key = strains, value = HA_score, 
+         `GB_KY522877-A_SWINE_NORTH_CAROLINA_A01672011_2017-SEGMENT_4`:`VACCINE_EPITOPES_CLASSII-NTC8682-ERNA41H-1SOJII`) %>%
+  select(strains,HA_score) %>% mutate(header = strains) %>% 
+  separate(header, into = c("ID", "Sequence", "Segment"), sep = "-", extra = "merge")
+epicc_data_4_clsII_long$HA_score <- as.numeric(epicc_data_4_clsII_long$HA_score)
+epicc_data_4_clsII_sort <- epicc_data_4_clsII_long %>% filter(!Sequence == "NTC8682") %>%
+  arrange(Sequence) %>% arrange(desc(HA_score))
+epicc_data_4_clsII_top10 <- head(epicc_data_4_clsII_sort, 10)
+epicc_data_4_clsII_top10 <- epicc_data_4_clsII_top10 %>% select(Sequence, Segment)
+
+#NP
+#epicc_data_5_clsII$`GB_KY888031-A_SWINE_KANSAS_A01378019_2017-SEGMENT_5`
+#epicc_data_5_clsII$`VACCINE_EPITOPES_CLASSII-NTC8682-ERNA41H-1SOJII`
+epicc_data_5_clsII_long <- epicc_data_5_clsII %>% 
+  gather(key = strains, value = NP_score, 
+         `GB_KY888031-A_SWINE_KANSAS_A01378019_2017-SEGMENT_5`:`VACCINE_EPITOPES_CLASSII-NTC8682-ERNA41H-1SOJII`) %>%
+  select(strains,NP_score) %>% mutate(header = strains) %>% 
+  separate(header, into = c("ID", "Sequence", "Segment"), sep = "-", extra = "merge")
+epicc_data_5_clsII_long$NP_score <- as.numeric(epicc_data_5_clsII_long$NP_score)
+epicc_data_5_clsII_sort <- epicc_data_5_clsII_long %>% filter(!Sequence == "NTC8682") %>%
+  arrange(Sequence) %>% arrange(desc(NP_score))
+epicc_data_5_clsII_top10 <- head(epicc_data_5_clsII_sort, 10)
+epicc_data_5_clsII_top10 <- epicc_data_5_clsII_top10 %>% select(Sequence, Segment)
+
+#NA
+#epicc_data_6_clsII$`GB_KY522878-A_SWINE_NORTH_CAROLINA_A01672011_2017-SEGMENT_6`
+#epicc_data_6_clsII$`VACCINE_EPITOPES_CLASSII-NTC8682-ERNA41H-1SOJII`
+epicc_data_6_clsII_long <- epicc_data_6_clsII %>% 
+  gather(key = strains, value = NA_score, 
+         `GB_KY522878-A_SWINE_NORTH_CAROLINA_A01672011_2017-SEGMENT_6`:`VACCINE_EPITOPES_CLASSII-NTC8682-ERNA41H-1SOJII`) %>%
+  select(strains,NA_score) %>% mutate(header = strains) %>% 
+  separate(header, into = c("ID", "Sequence", "Segment"), sep = "-", extra = "merge")
+epicc_data_6_clsII_long$NA_score <- as.numeric(epicc_data_6_clsII_long$NA_score)
+epicc_data_6_clsII_sort <- epicc_data_6_clsII_long %>% filter(!Sequence == "NTC8682") %>%
+  arrange(Sequence) %>% arrange(desc(NA_score))
+epicc_data_6_clsII_top10 <- head(epicc_data_6_clsII_sort, 10)
+epicc_data_6_clsII_top10 <- epicc_data_6_clsII_top10 %>% select(Sequence, Segment)
+
+#M
+#epicc_data_7_clsII$`GB_KY888033-A_SWINE_KANSAS_A01378019_2017-SEGMENT_7`
+#epicc_data_7_clsII$`VACCINE_EPITOPES_CLASSII-NTC8682-ERNA41H-1SOJII`
+epicc_data_7_clsII_long <- epicc_data_7_clsII %>% 
+  gather(key = strains, value = M_score, 
+         `GB_KY888033-A_SWINE_KANSAS_A01378019_2017-SEGMENT_7`:`VACCINE_EPITOPES_CLASSII-NTC8682-ERNA41H-1SOJII`) %>%
+  select(strains,M_score) %>% mutate(header = strains) %>% 
+  separate(header, into = c("ID", "Sequence", "Segment"), sep = "-", extra = "merge")
+epicc_data_7_clsII_long$M_score <- as.numeric(epicc_data_7_clsII_long$M_score)
+epicc_data_7_clsII_sort <- epicc_data_7_clsII_long %>% filter(!Sequence == "NTC8682") %>%
+  arrange(Sequence) %>% arrange(desc(M_score))
+epicc_data_7_clsII_top10 <- head(epicc_data_7_clsII_sort, 10)
+epicc_data_7_clsII_top10 <- epicc_data_7_clsII_top10 %>% select(Sequence, Segment)
+
+#NS
+#epicc_data_8_clsII$`GB_KY888034-A_SWINE_KANSAS_A01378019_2017-SEGMENT_8`
+#epicc_data_8_clsII$`VACCINE_EPITOPES_CLASSII-NTC8682-ERNA41H-1SOJII`
+epicc_data_8_clsII_long <- epicc_data_8_clsII %>% 
+  gather(key = strains, value = NS_score, 
+         `GB_KY888034-A_SWINE_KANSAS_A01378019_2017-SEGMENT_8`:`VACCINE_EPITOPES_CLASSII-NTC8682-ERNA41H-1SOJII`) %>%
+  select(strains,NS_score) %>% mutate(header = strains) %>% 
+  separate(header, into = c("ID", "Sequence", "Segment"), sep = "-", extra = "merge")
+epicc_data_8_clsII_long$NS_score <- as.numeric(epicc_data_8_clsII_long$NS_score)
+epicc_data_8_clsII_sort <- epicc_data_8_clsII_long %>% filter(!Sequence == "NTC8682") %>%
+  arrange(Sequence) %>% arrange(desc(NS_score))
+epicc_data_8_clsII_top10 <- head(epicc_data_8_clsII_sort, 10)
+epicc_data_8_clsII_top10 <- epicc_data_8_clsII_top10 %>% select(Sequence, Segment)
+```
+
+```{r To identify top occuring strains for Class II}
+epicc_data_clsII_top10_all <- rbind.data.frame(epicc_data_1_clsII_top10,epicc_data_2_clsII_top10,
+                                               epicc_data_3_clsII_top10,epicc_data_4_clsII_top10,
+                                               epicc_data_5_clsII_top10,epicc_data_6_clsII_top10,
+                                               epicc_data_7_clsII_top10,epicc_data_8_clsII_top10)
+```
+
+##### MHC Class II top 10 data preview
+```{r Preview 5, echo = TRUE}
+head(epicc_data_clsII_top10_all)
+tail(epicc_data_clsII_top10_all)
+unique(epicc_data_clsII_top10_all$Sequence)
+unique(epicc_data_clsII_top10_all$Segment)
+```
+
+```{r Preview 6, echo = TRUE, echo=TRUE}
+most_occurence_strain_clsII <- epicc_data_clsII_top10_all %>% group_by(Sequence) %>% summarise(count = n()) %>%
+  arrange(desc(count)) %>% filter(count >= 3)
+max(most_occurence_strain_clsII$count)
+most_occurence_strain_clsII
+```
+Maximum frequency = 7 out of 8. Same selection criteria as Class I data, we considered strains that of frequency starting 3.
+
+#### 6. To plot the frequency of MHC Class I/II top 10 strains from all 8 proteins
+```{r plotting}
+epicc_data_clsI_top10_all <- epicc_data_clsI_top10_all %>% group_by(Sequence) %>% summarise(count = n()) %>%
+  arrange(desc(count))
+epicc_data_clsII_top10_all <- epicc_data_clsII_top10_all %>% group_by(Sequence) %>% summarise(count = n()) %>%
+  arrange(desc(count))
+
+epicc_data_clsI_top10_all$Sequence <- factor(epicc_data_clsI_top10_all$Sequence, 
+                                        levels = epicc_data_clsI_top10_all$Sequence[order(-epicc_data_clsI_top10_all$count)])
+plot_clsI <- ggplot(epicc_data_clsI_top10_all, aes(x = Sequence, y = count)) + 
+  geom_bar(stat = "identity") + theme_classic() +
+  theme(legend.position = "right") +
+  labs(title = "EpiCC Result \n Top Matched H1N1 Swine IAV Strains \n (Class I)", 
+       x = "Strains", y = "Count (n)") +
+  theme(plot.title = element_text(hjust = 0.5, size = 14)) + 
+  theme(axis.text.x = element_text(angle = 72, hjust = 1, size = 7)) +
+  theme(axis.text.y = element_text(size = 9)) +
+  geom_vline(xintercept = 12, linetype="dashed", color = "red")
+
+epicc_data_clsII_top10_all$Sequence <- factor(epicc_data_clsII_top10_all$Sequence, 
+                                        levels = epicc_data_clsII_top10_all$Sequence[order(-epicc_data_clsII_top10_all$count)])
+plot_clsII <- ggplot(epicc_data_clsII_top10_all, aes(x = Sequence, y = count)) + 
+  geom_bar(stat = "identity") + theme_classic() +
+  theme(legend.position = "right") +
+  labs(title = "Top Matched H1N1 Swine IAV Strains \n (Class II)", 
+       x = "Strains", y = "Count (n)") +
+  theme(plot.title = element_text(hjust = 0.5, size = 14)) + 
+  theme(axis.text.x = element_text(angle = 72, hjust = 1, size = 7)) +
+  theme(axis.text.y = element_text(size = 9)) +
+  geom_vline(xintercept = 14, linetype="dashed", color = "red")
+
+grid.arrange(plot_clsI, plot_clsII, nrow = 2)
+```
+Figure 1.2 | Figure shows strains that are found in the top 10 list of every proteins and their frequencies were counted. This is to identify strains that are constantly having top EpiCC score across the whole genome. A reference line is drawn and strains are shortlisted based on the cut off point.   
+
+
+#### 7. Identify strains that are common in both Class I and Class II
+```{r To find common strains, echo=TRUE}
+epicc_overlap <- most_occurence_strain_clsII$Sequence %in% most_occurence_strain_clsI$Sequence 
+epicc_common <- most_occurence_strain_clsII[epicc_overlap,1]
+```
+
+### EpiCC Result
+```{r EpiCC - Overlapping strains, echo = TRUE}
+epicc_common
+```
+There are 8 Swine IAV found in both Class I and Class II top EpiCC score list. This means 8 of these strains are having relatively high epitope content to the reference vaccine strain compared to other H1N1 Swine IAV sequences.
+
+## Part II
+## About JMX
+
+JanusMatrix (JMX) or it is also called Janus Immunogenicity Score (JIS) - A web-based tool that incorporated a well-established method for MHC (major histocompatibility complex) binding prediction, with a novel assessment of the potential for T cell receptor (TCR) binding based on similarity with self. This means both good MHC binding and poor self-similarity are required for high immunogenicity, i.e. a robust T effector response (He et. al, 2013).
+
+### Aim
+In this case, we are not looking for self-similarity epitopes but to identify strains that have the most epitopes coverage found in the swine DNA vaccine sequences of MHC Class I / II. From EpiCC analysis, it can only tells us how much relatedness (top EpiCC score) in terms of epitope content but we would not know what epitope sequences are in the content, and JMX is able to. 
+
+### Materials
+Input to JMX tool: DNA vaccine sequences of MHC ClassI / II were used to query against a set of database that comprised of 72 H1N1 Swine IAV sequences.
+
+Output from JMX tool to process and analyze: 8 HTML outfiles for MHC Class I and II respectively.
+
+### Methodology/ Working steps
+
+#### 1. Load JMX MHC Class I data and clean up unnecessary rows and columns
+```{r Load data - part I}
+#Segment1 - PB2
+jmx_data_1_clsI <- read.csv("dataset/JMX_SEGMENT1_CLASS1.csv", header = FALSE, stringsAsFactors = FALSE, sep = ",")
+jmx_data_1_clsI_strain <- jmx_data_1_clsI %>% select(V1,V4) %>% rename(header = V1, Epitope = V4) %>% slice(22) 
+jmx_data_1_clsI_strain$header[1] <- "No Hit-No Hit-No Hit"
+jmx_data_1_clsI_strain <- jmx_data_1_clsI_strain %>% separate(header, into = c("Filename", "Sequence", "Segment"), sep = "-", extra = "merge")
+#There's no hit for this segment
+
+#Segment2 - PB1
+jmx_data_2_clsI <- read.csv("dataset/JMX_SEGMENT2_CLASS1.csv", header = FALSE, stringsAsFactors = FALSE, sep = ",")
+jmx_data_2_clsI_strain <- jmx_data_2_clsI %>% select(V1,V4) %>% rename(header = V1, Epitope = V4) %>%
+  slice(24:96) 
+jmx_data_2_clsI_strain$header[73] <- "No Hit-No Hit-No Hit"
+jmx_data_2_clsI_strain <- jmx_data_2_clsI_strain %>% filter(!header == "VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI",
+                          Epitope == "DTVNRTHQY" | Epitope == "QVSRPMFLY") %>%
+  separate(header, into = c("Filename", "Sequence", "Segment"), sep = "-", extra = "merge")
+
+#Segment3 - PA
+jmx_data_3_clsI <- read.csv("dataset/JMX_SEGMENT3_CLASS1.csv", header = FALSE, stringsAsFactors = FALSE, sep = ",")
+jmx_data_3_clsI_strain <- jmx_data_3_clsI %>% select(V1,V4) %>% rename(header = V1, Epitope = V4) %>%
+  slice(22) 
+jmx_data_3_clsI_strain$header[1] <- "No Hit-No Hit-No Hit"
+jmx_data_3_clsI_strain <- jmx_data_3_clsI_strain %>% separate(header, into = c("Filename", "Sequence", "Segment"), sep = "-", extra = "merge")
+#There's no hit for this segment
+
+#Segment4 - HA
+jmx_data_4_clsI <- read.csv("dataset/JMX_SEGMENT4_CLASS1.csv", header = FALSE, stringsAsFactors = FALSE, sep = ",")
+jmx_data_4_clsI_strain <- jmx_data_4_clsI %>% select(V1, V4) %>% rename(header = V1, Epitope = V4) %>%
+  slice(30:512) %>% filter(!header == "VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI" ,
+                           Epitope == "RIYQILAIY" | Epitope == "ITIGKCPKY"|
+                           Epitope == "TSADQQSLY"| Epitope == "SVKNGTYDY"|
+                           Epitope == "NADTLCIGY"| Epitope == "GMVDGWYGY"|
+                           Epitope == "LSTASSWSY"| Epitope == "GMIDGWYGY") %>%
+  separate(header, into = c("Filename", "Sequence", "Segment"), sep = "-", extra = "merge")
+
+#Segment5 - NP
+jmx_data_5_clsI <- read.csv("dataset/JMX_SEGMENT5_CLASS1.csv", header = FALSE, stringsAsFactors = FALSE, sep = ",")
+jmx_data_5_clsI_strain <- jmx_data_5_clsI %>% select(V1, V4) %>% rename(header = V1, Epitope = V4) %>%
+  slice(c(24,26:98))
+jmx_data_5_clsI_strain$header[c(1,74)] <- "No Hit-No Hit-No Hit"
+jmx_data_5_clsI_strain <- jmx_data_5_clsI_strain %>% filter(!header == "VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI",
+                          Epitope == "GTEKLTITY" | Epitope == "CTELKLSDY" |
+                            Epitope == "VSDGGPNLY") %>%
+  separate(header, into = c("Filename", "Sequence", "Segment"), sep = "-", extra = "merge")
+
+#Segment6 - NA
+jmx_data_6_clsI <- read.csv("dataset/JMX_SEGMENT6_CLASS1.csv", header = FALSE, stringsAsFactors = FALSE, sep = ",")
+jmx_data_6_clsI_strain <- jmx_data_6_clsI %>% select(V1, V4) %>% rename(header = V1, Epitope = V4) %>%
+  slice(28:243) 
+jmx_data_6_clsI_strain$header[c(71,144:145)] <- "No Hit-No Hit-No Hit"
+jmx_data_6_clsI_strain <- jmx_data_6_clsI_strain %>% filter(!header == "VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI",
+                           Epitope == "EMNAPNYHY" | Epitope == "DTVHDRTPY" |
+                             Epitope == "GTIKDRSPY" | Epitope == "EICPKLAEY" | 
+                             Epitope == "KSCINRCFY" | Epitope == "ELDAPNYHY") %>%
+  separate(header, into = c("Filename", "Sequence", "Segment"), sep = "-", extra = "merge")
+
+#Segment7 - M
+jmx_data_7_clsI <- read.csv("dataset/JMX_SEGMENT7_CLASS1.csv", header = FALSE, stringsAsFactors = FALSE, sep = ",")
+jmx_data_7_clsI_strain <- jmx_data_7_clsI %>% select(V1, V4) %>% rename(header = V1, Epitope = V4) %>%
+  slice(29:386) 
+jmx_data_7_clsI_strain$header[c(212,358)] <- "No Hit-No Hit-No Hit"
+jmx_data_7_clsI_strain <- jmx_data_7_clsI_strain %>% filter(!header == "VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI",
+                           Epitope == "SLLTEVETY" | Epitope == "LASCMGLIY" |
+                             Epitope == "LTEVETYVL" | Epitope == "GAKEVALSY" |
+                             Epitope == "DLLENLQAY" | Epitope == "NTDLEALME" |
+                             Epitope == "NMDKAVKLY") %>%
+  separate(header, into = c("Filename", "Sequence", "Segment"), sep = "-", extra = "merge")
+
+#Segment8 - NS
+#There's no peptide sequences hit for NS
+```
+
+##### Class I PB1 - Data preview
+```{r MHC Class I data preview for PB1, echo = TRUE}
+colnames(jmx_data_2_clsI_strain)
+head(jmx_data_2_clsI_strain[,2:4])
+```
+
+#### 2. Combine all proteins that have epitope sequence hits and calculate the strain frequency
+```{r Row bind all data - part I}
+jmx_data_all_clsI <- rbind(jmx_data_1_clsI_strain, jmx_data_2_clsI_strain, 
+                           jmx_data_3_clsI_strain, jmx_data_4_clsI_strain,
+                           jmx_data_5_clsI_strain, jmx_data_6_clsI_strain, 
+                           jmx_data_7_clsI_strain)
+jmx_data_all_clsI_matrix <- jmx_data_all_clsI %>% select(Sequence, Segment, Epitope) %>%
+  group_by(Sequence, Segment, Epitope) %>% summarise(Count = n()) %>% mutate(Presence = 1) 
+```
+
+##### Class I JMX Data preview
+```{r MHC Class I data preview, echo = TRUE}
+colnames(jmx_data_all_clsI_matrix)
+head(jmx_data_all_clsI_matrix)
+```
+
+#### 3. Data visualization - Heat map
+```{r Heat map}
+ggplot(jmx_data_all_clsI_matrix, aes(Sequence, Epitope) ) + 
+  geom_tile(aes(fill = Presence), show.legend = FALSE) + theme_grey() + theme(legend.position = "right") +
+  labs(title = "JMX Class I \n Epitopes Distribution in H1N1 Swine IAV", x = "Strains", 
+       y = "Epitopes") +
+  theme(plot.title = element_text(hjust = 0.5, size = 14)) + 
+  theme(axis.text.x = element_text(angle = 68, hjust = 1, size = 9)) +
+  theme(axis.text.y = element_text(size = 9))
+```
+Figure 2.1 | H1N1 Swine IAV strains are plotted against epitopes that found in the DNA vaccine. Blue spots indicate the presence of the epitope, wherease blank spots indicate the opposite. Horizontal view will tell which epitopes are presence and how conserved they are across the strains, while vertical view shows the number of epitopes found in a particular IAV strain.
+
+#### 4. To calculate strain frequency and identify the most occuring strain(s)
+```{r To find most occuring strain(s)}
+jmx_data_all_clsI <- jmx_data_all_clsI %>% filter(!Sequence == "No Hit")
+n_occur <- data.frame(table(jmx_data_all_clsI$Sequence))
+n_occur <- n_occur[order(-n_occur$Freq),]
+```
+
+##### Frequency table
+```{r To show frequency table, echo = TRUE}
+n_occur
+max(n_occur$Freq)
+min(n_occur$Freq)
+```
+
+##### To extract top occuring strains 
+```{r To retrieve the top occuring strains, echo = TRUE}
+jmx_data_all_clsI_freq <- n_occur[n_occur$Freq >= 15,]
+nrow(jmx_data_all_clsI_freq)
+jmx_data_all_clsI_freq
+```
+
+
+#### 5. JMX Class II Data - Load and clean up unnecessary columns and rows
+
+##### [Note] There is slightly different in terms of approach and data interpretation compare to JMX Class I due to the length of epiotpes targeted in Class I and Class II are different. Class I epitopes are of the exact length of 9 amino acids, whereas the length of Class II epitopes are between 17-24 amino acids. 
+
+```{r Load JMX Class II data}
+#Segment1 - PB2
+jmx_data_1_clsII <- read.csv("dataset/JMX_SEGMENT1_CLASS2.csv", header = FALSE, stringsAsFactors = FALSE, sep = ",")
+#There's no hit for this segment
+
+#Segment2 - PB1
+jmx_data_2_clsII <- read.csv("dataset/JMX_SEGMENT2_CLASS2.csv", header = FALSE, stringsAsFactors = FALSE, sep = ",")
+jmx_data_2_clsII_strain <- jmx_data_2_clsII %>% select(V1, V4) %>% rename(header = V1, Peptide = V4) %>%
+  slice(22:617) %>% filter(!header == "", !header == "VACCINE_EPITOPES_CLASSII-NTC8682-ERNA41H-1SOJII") %>%
+  separate(header, into = c("Filename", "Sequence", "Segment"), sep = "-", extra = "merge") %>%
+  separate(Peptide, into = c("1","2","3","4","5","6","7","8","9","10"), sep = "\xca", extra = "merge")
+jmx_data_2_clsII_peptide <- jmx_data_2_clsII_strain %>% select(Sequence,`1`:`10`) %>%
+  gather(key = String, value = Epitopes, `1`:`10`) %>% filter(!Epitopes == "")
+jmx_data_2_clsII_strain <- jmx_data_2_clsII_strain %>% select(1:3) %>% 
+  full_join(jmx_data_2_clsII_peptide) %>% filter(!Epitopes == "LSTVLGVSV")
+  
+
+#Segment3 - PA
+jmx_data_3_clsII <- read.csv("dataset/JMX_SEGMENT3_CLASS2.csv", header = FALSE, stringsAsFactors = FALSE, sep = ",")
+jmx_data_3_clsII_strain <- jmx_data_3_clsII %>% select(V1, V4) %>% rename(header = V1, Peptide = V4) %>%
+  slice(24:612) %>% filter(!header == "", !header == "VACCINE_EPITOPES_CLASSII-NTC8682-ERNA41H-1SOJII") %>%
+  separate(header, into = c("Filename", "Sequence", "Segment"), sep = "-", extra = "merge") %>%
+  separate(Peptide, into = c("1","2","3","4","5","6","7","8","9","10","11","12"), sep = "\xca", extra = "merge")
+jmx_data_3_clsII_peptide <- jmx_data_3_clsII_strain %>% select(Sequence,`1`:`12`) %>%
+  gather(key = String, value = Epitopes, `1`:`12`) %>% filter(!Epitopes == "")
+jmx_data_3_clsII_strain <- jmx_data_3_clsII_strain %>% select(1:3) %>% 
+  full_join(jmx_data_3_clsII_peptide)
+
+#Segment4 - HA
+jmx_data_4_clsII <- read.csv("dataset/JMX_SEGMENT4_CLASS2.csv", header = FALSE, stringsAsFactors = FALSE, sep = ",")
+jmx_data_4_clsII_strain <- jmx_data_4_clsII %>% select(V1, V4) %>% rename(header = V1, Peptide = V4) %>%
+  slice(23:913) %>% filter(!header == "", !header == "VACCINE_EPITOPES_CLASSII-NTC8682-ERNA41H-1SOJII") %>%
+  separate(header, into = c("Filename", "Sequence", "Segment"), sep = "-", extra = "merge") %>%
+  separate(Peptide, into = c("1","2","3","4","5","6","7","8","9","10","11","12"), sep = "\xca", extra = "merge")
+jmx_data_4_clsII_peptide <- jmx_data_4_clsII_strain %>% select(Sequence,`1`:`12`) %>%
+  gather(key = String, value = Epitopes, `1`:`12`) %>% filter(!Epitopes == "")
+jmx_data_4_clsII_strain <- jmx_data_4_clsII_strain %>% select(1:3) %>% 
+  full_join(jmx_data_4_clsII_peptide) %>% filter(Epitopes == "YEELREQLS" | Epitopes == "LREQLSSVS" | Epitopes == "REQLSSVSS" | Epitopes == "LSSVSSFER" | Epitopes == "ITFEATGNL" | Epitopes == "FEATGNLVV" | Epitopes == "MERNAGSGI" | Epitopes == "IYQILAIYS" | Epitopes == "YQILAIYST" | Epitopes == "ILAIYSTVA" | Epitopes == "IYSTVASSL" | Epitopes == "YSTVASSLV" | Epitopes == "STVASSLVL")
+
+#Segment5 - NP
+jmx_data_5_clsII <- read.csv("dataset/JMX_SEGMENT5_CLASS2.csv", header = FALSE, stringsAsFactors = FALSE, sep = ",")
+jmx_data_5_clsII_strain <- jmx_data_5_clsII %>% select(V1, V4) %>% rename(header = V1, Peptide = V4) %>%
+  slice(25:917) %>% filter(!header == "", !header == "VACCINE_EPITOPES_CLASSII-NTC8682-ERNA41H-1SOJII") %>%
+  separate(header, into = c("Filename", "Sequence", "Segment"), sep = "-", extra = "merge") %>%
+  separate(Peptide, into = c("1","2","3","4","5","6","7","8","9","10","11","12","13","14"), sep = "\xca", extra = "merge")
+jmx_data_5_clsII_peptide <- jmx_data_5_clsII_strain %>% select(Sequence,`1`:`14`) %>%
+  gather(key = String, value = Epitopes, `1`:`14`) %>% filter(!Epitopes == "")
+jmx_data_5_clsII_strain <- jmx_data_5_clsII_strain %>% select(1:3) %>% 
+  full_join(jmx_data_5_clsII_peptide) %>% filter(Epitopes == "VQIASNENV" | Epitopes == "IASNENVET" | Epitopes == "VETMDSNTL" | Epitopes == "TMDSNTLEL" | Epitopes == "FKLLQNSQV" | Epitopes == "KLLQNSQVV" | Epitopes == "LQNSQVVSL" | Epitopes == "LIFLARSAL" | Epitopes == "IFLARSALI" | Epitopes == "FLARSALIL" | Epitopes == "RSALILRGS" | Epitopes == "LILRGSVAH" | Epitopes == "LRGSVAHKS")
+
+#Segment6 - NA
+jmx_data_6_clsII <- read.csv("dataset/JMX_SEGMENT6_CLASS2.csv", header = FALSE, stringsAsFactors = FALSE, sep = ",")
+jmx_data_6_clsII_strain <- jmx_data_6_clsII %>% select(V1, V4) %>% rename(header = V1, Peptide = V4) %>%
+  slice(26:359) %>% filter(!header == "", !header == "VACCINE_EPITOPES_CLASSII-NTC8682-ERNA41H-1SOJII") %>%
+  separate(header, into = c("Filename", "Sequence", "Segment"), sep = "-", extra = "merge") %>%
+  separate(Peptide, into = c("1","2","3","4","5","6","7","8","9","10","11","12","13","14"), sep = "\xca", extra = "merge")
+jmx_data_6_clsII_peptide <- jmx_data_6_clsII_strain %>% select(Sequence,`1`:`14`) %>%
+  gather(key = String, value = Epitopes, `1`:`14`) %>% filter(!Epitopes == "")
+jmx_data_6_clsII_strain <- jmx_data_6_clsII_strain %>% select(1:3) %>% 
+  full_join(jmx_data_6_clsII_peptide) %>% filter(Epitopes == "FFLTQGALL" | Epitopes == "FLTQGALLN" | Epitopes == "YVNISNTNF" | Epitopes == "VNISNTNFA" | Epitopes == "FAAGQSVVS" | Epitopes == "LILQIGNII" | Epitopes == "ILQIGNIIS" | Epitopes == "IGNIISIWI" | Epitopes == "SVVSVKLAG" | Epitopes == "VKLAGNSSL" | Epitopes == "LAGNSSLCP")
+
+#Segment7 - M
+jmx_data_7_clsII <- read.csv("dataset/JMX_SEGMENT7_CLASS2.csv", header = FALSE, stringsAsFactors = FALSE, sep = ",")
+jmx_data_7_clsII_strain <- jmx_data_7_clsII %>% select(V1, V4) %>% rename(header = V1, Peptide = V4) %>%
+  slice(23:829) %>% filter(!header == "", !header == "VACCINE_EPITOPES_CLASSII-NTC8682-ERNA41H-1SOJII") %>%
+  separate(header, into = c("Filename", "Sequence", "Segment"), sep = "-", extra = "merge") %>%
+  separate(Peptide, into = c("1","2","3","4","5","6","7","8","9","10","11","12","13","14"), sep = "\xca", extra = "merge")
+jmx_data_7_clsII_peptide <- jmx_data_7_clsII_strain %>% select(Sequence,`1`:`14`) %>%
+  gather(key = String, value = Epitopes, `1`:`14`) %>% filter(!Epitopes == "")
+jmx_data_7_clsII_strain <- jmx_data_7_clsII_strain %>% select(1:3) %>% 
+  full_join(jmx_data_7_clsII_peptide) %>% filter(Epitopes == "YVLSIIPSG" | Epitopes == "LSIIPSGPL" | Epitopes == "IIPSGPLKA" | Epitopes == "LKAEIAQRL" | Epitopes == "MGLIYNRMG" | Epitopes == "YNRMGTVTT" | Epitopes == "MGTVTTEAA" | Epitopes == "VTTEAAFGL" | Epitopes == "MVHAMRTIG" | Epitopes == "VHAMRTIGT" | Epitopes == "MRTIGTHPS")
+
+#Segment8 - NS
+jmx_data_8_clsII <- read.csv("dataset/JMX_SEGMENT8_CLASS2.csv", header = FALSE, stringsAsFactors = FALSE, sep = ",")
+#There's no hit for this segment
+```
+
+##### Class II PB1 - Data preview
+```{r Class II  PB1, echo = TRUE}
+head(jmx_data_2_clsII_strain[,2:5])
+```
+
+#### 6. Combine all proteins and calculate frequency of epitope hits for each strain
+```{r To combine all Class II data}
+jmx_data_all_clsII <- rbind(jmx_data_2_clsII_strain, jmx_data_3_clsII_strain, 
+                           jmx_data_4_clsII_strain, jmx_data_5_clsII_strain, 
+                           jmx_data_6_clsII_strain, jmx_data_7_clsII_strain)
+jmx_data_all_clsII_matrix <- jmx_data_all_clsII %>% select(Sequence, Segment, Epitopes) %>%
+  group_by(Sequence, Segment, Epitopes) %>% summarise(Count = n())
+```
+
+##### Class II JMX Data preview
+```{r MHC Class II data preview, echo = TRUE}
+colnames(jmx_data_all_clsII_matrix)
+head(jmx_data_all_clsII_matrix)
+```
+
+#### 7. Class II - to calculate Class II strain frequency
+```{r To calculate frequency}
+n_occur_clsII <- data.frame(table(jmx_data_all_clsII$Sequence))
+n_occur_clsII <- n_occur_clsII[order(-n_occur_clsII$Freq),]
+```
+
+##### Frequency table
+```{r Class II - To show frequency table, echo = TRUE}
+n_occur_clsII
+max(n_occur_clsII$Freq)
+min(n_occur_clsII$Freq)
+```
+
+#### 8. Data visualization of JMX Class II data
+```{r To plot JMX Class II}
+ggplot(jmx_data_all_clsII_matrix, aes(Sequence, Count, fill = Segment) ) + 
+  geom_bar(stat = "identity") + theme_grey() + theme(legend.position = "right") +
+  labs(title = "JMX Class II \n Antigens Distribution in H1N1 Swine IAV", x = "Strains", 
+       y = "Count (n)") + scale_fill_discrete(name = "Antigens",
+                                              labels = c("PB1","PA","HA",
+                                                         "NP","NA","M"))+
+  theme(plot.title = element_text(hjust = 0.5, size = 14)) + 
+  theme(axis.text.x = element_text(angle = 68, hjust = 1, size = 9)) +
+  theme(axis.text.y = element_text(size = 9)) + 
+  geom_hline(yintercept = 555, linetype="dashed", color = "black")
+```
+Figure 2.2 | The stacked bar chart shows the total epitopes (in each antigen) found in H1N1 Swine IAV strains. A reference line is drawn across the bar plot and strains that have total frequency equal or above the reference line will be considered. 
+
+##### Class II - To extract strains that meet the cut off value 
+```{r To retrieve strains, echo = TRUE}
+jmx_data_all_clsII_freq <- n_occur_clsII[n_occur_clsII$Freq >= 555,]
+nrow(jmx_data_all_clsII_freq)
+jmx_data_all_clsII_freq
+```
+
+#### 9. To find common strains between Class I and Class II JMX data 
+```{r Further retrieval, echo = TRUE}
+jmx_overlap <- jmx_data_all_clsI_freq$Var1 %in% jmx_data_all_clsII_freq$Var1
+jmx_common <- jmx_data_all_clsI_freq[jmx_overlap,]
+```
+
+### JMX Result
+```{r Class II - Overlapping strains, echo = TRUE}
+jmx_common[,1]
+```
+There are 24 Swine IAV strains overlapped betwee both Class I and Class II JMX data. This means 24 of these strains are having relatively high epitope matches to the DNA vaccine epitopes.
+
+#### 10. To find overlapping strains between EpiCC and JMX results
+```{r Common between two approaches, echo = TRUE}
+common_both <- epicc_common$Sequence %in% jmx_common$Var1 
+which(common_both == TRUE)
+```
+
+### Final result from two approaches - combining EpiCC and JMX
+```{r Overlapping strains, echo = TRUE}
+epicc_common[common_both,1]
+```
+Conclusion from the analysis: A total of 6 shortlisted H1N1 Swine IAV strains that can be used as challenge strains. Further decision is subjected to collaborator's point of view as there are few more factors (e.g. the antibodies profile) to be considered before reaching a final decision of picking a challenge strain to use in their vaccine study in pigs.
+

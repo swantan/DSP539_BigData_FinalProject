@@ -1,0 +1,5 @@
+"0","jmx_data_all_clsII <- rbind(jmx_data_2_clsII_strain, jmx_data_3_clsII_strain, "
+"0","                           jmx_data_4_clsII_strain, jmx_data_5_clsII_strain, "
+"0","                           jmx_data_6_clsII_strain, jmx_data_7_clsII_strain)"
+"0","jmx_data_all_clsII_matrix <- jmx_data_all_clsII %>% select(Sequence, Segment, Epitopes) %>%"
+"0","  group_by(Sequence, Segment, Epitopes) %>% summarise(Count = n())"

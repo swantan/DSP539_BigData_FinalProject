@@ -1,0 +1,3 @@
+"0","jmx_data_all_clsI <- jmx_data_all_clsI %>% filter(!Sequence == ""No Hit"")"
+"0","n_occur <- data.frame(table(jmx_data_all_clsI$Sequence))"
+"0","n_occur <- n_occur[order(-n_occur$Freq),]"

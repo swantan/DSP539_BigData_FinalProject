@@ -1,0 +1,3 @@
+"0","epicc_overlap <- most_occurence_strain_clsII$Sequence %in% most_occurence_strain_clsI$Sequence "
+"0","epicc_common <- most_occurence_strain_clsII[overlap,]"
+"0","toretrieve_subtype <- epicc_data_clsII_top10_all$Sequence %in% common$Sequence"

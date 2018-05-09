@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1524681779961.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "525EE07E",
+    "lastKnownWriteTime" : -144115188075855866,
+    "last_content_update" : 1524681779961,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "2C0E51A0",
+        "caption" : "clade_info",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=clade_info&cache_key=2C0E51A0",
+        "displayedObservations" : "72",
+        "environment" : "",
+        "object" : "clade_info",
+        "preview" : "0",
+        "totalObservations" : "72",
+        "variables" : "8"
+    },
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

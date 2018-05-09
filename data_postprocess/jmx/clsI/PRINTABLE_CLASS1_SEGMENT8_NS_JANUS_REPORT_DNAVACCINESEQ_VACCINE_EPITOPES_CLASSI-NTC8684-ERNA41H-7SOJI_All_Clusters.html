@@ -1,0 +1,342 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>Summary of Class I Janus results</title>
+ 
+    <script type="text/javascript">
+    //<![CDATA[
+    function getElementsByClassName1(node, classname) {
+        var a = [];
+        var re = new RegExp('(^| )'+classname+'( |$)');
+        var els = node.getElementsByTagName("*");
+        for(var i=0,j=els.length; i<j; i++)
+            if(re.test(els[i].className))a.push(els[i]);
+        return a;
+    }
+    function toggle_display(num_to_display) {
+    var all_janus_rows = getElementsByClassName1(document.body, num_to_display);
+    for (i=0;i<all_janus_rows.length;i++) {
+    if (all_janus_rows[i].style.display == "table-row")
+    all_janus_rows[i].style.display = "none";
+    else
+    all_janus_rows[i].style.display = "table-row";
+    }
+    }
+    function toggle_all(orf_id) {
+    var selector = ".x" + orf_id;
+    var rowID = "expand_all_" + orf_id;
+    var all_janus_rows = document.querySelectorAll(selector);
+    for (i=0;i<all_janus_rows.length;i++) {      
+    if (document.all && document.getElementById(rowID).value == "[-] Hide Matches") {        
+    all_janus_rows[i].style.display = "none";      
+    }      
+    else if (document.all && document.getElementById(rowID).value == "[+] Show Matches") {        
+    all_janus_rows[i].style.display = "table-row";      
+    }      
+    else if (document.getElementById(rowID).value == "[-] Hide Matches") {        
+    all_janus_rows[i].style.display = "none";      
+    }      
+    else if (document.getElementById(rowID).value == "[+] Show Matches") {        
+    all_janus_rows[i].style.display = "table-row";      
+    }    
+    }    
+    document.getElementById(rowID).value = document.getElementById(rowID).value == "[+] Show Matches" ? "[-] Hide Matches" : "[+] Show Matches";
+    }
+    //]]>
+    </script>
+    
+    <style type="text/css">
+    body {background-color:#FFFFFF; font-size:11pt;font-family:arial}
+    .tbl {border-collapse: collapse;text-align: center;vertical-align: middle;white-space:nowrap; font-size: 100%;page-break-inside:auto;}
+    th,td {border: 1px solid black;}
+    .tbl td.none {border-style:none; background-color:white;}
+    .tbl th.none {border-style:none;background-color:white;}
+    th {background-color:rgb(37,64,97); font-weight:bold; color: white;}
+    tr {page-break-inside:avoid; page-break-after:auto;}
+    .sequence {font-family:"Courier New", Courier, monospace;}
+    .match_aa {color:#000000;}
+    .mismatch_aa {color:#FF0000;}
+    .janus_match_aa {color:black; text-decoration:underline;}
+.xvaccine_epitopes_classi-ntc8684-erna41h-7soji, .janus_match {display: none;}
+         .top_border {border-top-style:solid;border-top-color:black;border-top-width:5px;}
+         .top1 {background-color:#333366; color: white;}
+         .top5 {background-color:#9999CC; color: black;}
+         .top10 {background-color:#CCCCFF; color: black;}
+         .other_score {background-color:white; color: grey;}
+         .cluster_row {background-color:rgb(170,170,170); font-weight:bold; color: black;}
+         .ninemer_row {background-color:rgb(217,217,217); color: black;}
+         .left {text-align:left;}
+         .highlight {background-color:#CCCCCC;}
+, #expand_all_vaccine_epitopes_classi-ntc8684-erna41h-7so#expand_all {border:none;background:none; color: white;}
+         .expand_button {border:none;background:none; color: blue; text-decoration: underline;}
+         //.uniprot_link {text-decoration: none; color: black;}
+         .expand_button:hover { cursor: pointer; }
+        </style>
+</head>
+<body>
+<center><font color="#333366" size="+3">Overview of Class I JanusMatrix Results</font><br/><br/>
+<font color="#333366" size="+2"> Current File: DNAVACCINESEQ - Current Sequence: VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI<br/></font>
+<font color="#333366" size="+2"> Current Database: SWINEFLUH1N1_SEGMENT8_NS<br/></font>
+<font color="#333366" size="+1">April     20, 2018</font><br/>
+<br/><br/>
+<table class="tbl"><tr>
+<th class="sumhead">File</th>
+<th class="sumhead">Input<br/>Sequence</th>
+<th class="sumhead">Peptide Address</th>
+<th class="sumhead">Peptide Sequence</th>
+<th class="sumhead">Number of <br/>SWINEFLUH1N1_SEGMENT8_NS<br/>Matches</th>
+<th class="sumhead">Janus<br/>HMLGY<br/>Score</th>
+</tr>
+<tr class="highlight">
+<td class="cell">DNAVACCINESEQ</td><td class="cell">VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td>
+<td class="cell">79 - 87</td>
+<td class="cell"><tt>RIYQILAIY</tt></td>
+<td class="cell">0</td>
+<td class="cell"><a href="#VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_79_87">0</a></td>
+</tr>
+<tr>
+<td class="cell">DNAVACCINESEQ</td><td class="cell">VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td>
+<td class="cell">88 - 96</td>
+<td class="cell"><tt>ITIGKCPKY</tt></td>
+<td class="cell">0</td>
+<td class="cell"><a href="#VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_88_96">0</a></td>
+</tr>
+<tr class="highlight">
+<td class="cell">DNAVACCINESEQ</td><td class="cell">VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td>
+<td class="cell">97 - 105</td>
+<td class="cell"><tt>SLLTEVETY</tt></td>
+<td class="cell">0</td>
+<td class="cell"><a href="#VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_97_105">0</a></td>
+</tr>
+<tr>
+<td class="cell">DNAVACCINESEQ</td><td class="cell">VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td>
+<td class="cell">111 - 119</td>
+<td class="cell"><tt>TSADQQSLY</tt></td>
+<td class="cell">0</td>
+<td class="cell"><a href="#VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_111_119">0</a></td>
+</tr>
+<tr class="highlight">
+<td class="cell">DNAVACCINESEQ</td><td class="cell">VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td>
+<td class="cell">125 - 133</td>
+<td class="cell"><tt>EMNAPNYHY</tt></td>
+<td class="cell">0</td>
+<td class="cell"><a href="#VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_125_133">0</a></td>
+</tr>
+<tr>
+<td class="cell">DNAVACCINESEQ</td><td class="cell">VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td>
+<td class="cell">134 - 142</td>
+<td class="cell"><tt>LASCMGLIY</tt></td>
+<td class="cell">0</td>
+<td class="cell"><a href="#VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_134_142">0</a></td>
+</tr>
+<tr class="highlight">
+<td class="cell">DNAVACCINESEQ</td><td class="cell">VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td>
+<td class="cell">143 - 151</td>
+<td class="cell"><tt>DTVNRTHQY</tt></td>
+<td class="cell">0</td>
+<td class="cell"><a href="#VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_143_151">0</a></td>
+</tr>
+<tr>
+<td class="cell">DNAVACCINESEQ</td><td class="cell">VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td>
+<td class="cell">152 - 160</td>
+<td class="cell"><tt>GTEKLTITY</tt></td>
+<td class="cell">0</td>
+<td class="cell"><a href="#VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_152_160">0</a></td>
+</tr>
+<tr class="highlight">
+<td class="cell">DNAVACCINESEQ</td><td class="cell">VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td>
+<td class="cell">161 - 169</td>
+<td class="cell"><tt>AFDERRNKY</tt></td>
+<td class="cell">0</td>
+<td class="cell"><a href="#VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_161_169">0</a></td>
+</tr>
+<tr>
+<td class="cell">DNAVACCINESEQ</td><td class="cell">VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td>
+<td class="cell">170 - 178</td>
+<td class="cell"><tt>DTVHDRTPY</tt></td>
+<td class="cell">0</td>
+<td class="cell"><a href="#VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_170_178">0</a></td>
+</tr>
+<tr class="highlight">
+<td class="cell">DNAVACCINESEQ</td><td class="cell">VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td>
+<td class="cell">179 - 187</td>
+<td class="cell"><tt>LTEVETYVL</tt></td>
+<td class="cell">0</td>
+<td class="cell"><a href="#VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_179_187">0</a></td>
+</tr>
+<tr>
+<td class="cell">DNAVACCINESEQ</td><td class="cell">VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td>
+<td class="cell">193 - 201</td>
+<td class="cell"><tt>SVKNGTYDY</tt></td>
+<td class="cell">0</td>
+<td class="cell"><a href="#VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_193_201">0</a></td>
+</tr>
+<tr class="highlight">
+<td class="cell">DNAVACCINESEQ</td><td class="cell">VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td>
+<td class="cell">202 - 210</td>
+<td class="cell"><tt>GTIKDRSPY</tt></td>
+<td class="cell">0</td>
+<td class="cell"><a href="#VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_202_210">0</a></td>
+</tr>
+<tr>
+<td class="cell">DNAVACCINESEQ</td><td class="cell">VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td>
+<td class="cell">211 - 219</td>
+<td class="cell"><tt>NADTLCIGY</tt></td>
+<td class="cell">0</td>
+<td class="cell"><a href="#VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_211_219">0</a></td>
+</tr>
+<tr class="highlight">
+<td class="cell">DNAVACCINESEQ</td><td class="cell">VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td>
+<td class="cell">225 - 233</td>
+<td class="cell"><tt>GMVDGWYGY</tt></td>
+<td class="cell">0</td>
+<td class="cell"><a href="#VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_225_233">0</a></td>
+</tr>
+<tr>
+<td class="cell">DNAVACCINESEQ</td><td class="cell">VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td>
+<td class="cell">234 - 242</td>
+<td class="cell"><tt>CTELKLSDY</tt></td>
+<td class="cell">0</td>
+<td class="cell"><a href="#VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_234_242">0</a></td>
+</tr>
+<tr class="highlight">
+<td class="cell">DNAVACCINESEQ</td><td class="cell">VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td>
+<td class="cell">248 - 256</td>
+<td class="cell"><tt>VSDGGPNLY</tt></td>
+<td class="cell">0</td>
+<td class="cell"><a href="#VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_248_256">0</a></td>
+</tr>
+<tr>
+<td class="cell">DNAVACCINESEQ</td><td class="cell">VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td>
+<td class="cell">257 - 265</td>
+<td class="cell"><tt>EICPKLAEY</tt></td>
+<td class="cell">0</td>
+<td class="cell"><a href="#VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_257_265">0</a></td>
+</tr>
+<tr class="highlight">
+<td class="cell">DNAVACCINESEQ</td><td class="cell">VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td>
+<td class="cell">266 - 274</td>
+<td class="cell"><tt>KSCINRCFY</tt></td>
+<td class="cell">0</td>
+<td class="cell"><a href="#VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_266_274">0</a></td>
+</tr>
+<tr>
+<td class="cell">DNAVACCINESEQ</td><td class="cell">VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td>
+<td class="cell">275 - 283</td>
+<td class="cell"><tt>QVSRPMFLY</tt></td>
+<td class="cell">0</td>
+<td class="cell"><a href="#VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_275_283">0</a></td>
+</tr>
+<tr class="highlight">
+<td class="cell">DNAVACCINESEQ</td><td class="cell">VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td>
+<td class="cell">284 - 292</td>
+<td class="cell"><tt>GAKEVALSY</tt></td>
+<td class="cell">0</td>
+<td class="cell"><a href="#VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_284_292">0</a></td>
+</tr>
+<tr>
+<td class="cell">DNAVACCINESEQ</td><td class="cell">VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td>
+<td class="cell">298 - 306</td>
+<td class="cell"><tt>ELDAPNYHY</tt></td>
+<td class="cell">0</td>
+<td class="cell"><a href="#VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_298_306">0</a></td>
+</tr>
+<tr class="highlight">
+<td class="cell">DNAVACCINESEQ</td><td class="cell">VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td>
+<td class="cell">307 - 315</td>
+<td class="cell"><tt>DLLENLQAY</tt></td>
+<td class="cell">0</td>
+<td class="cell"><a href="#VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_307_315">0</a></td>
+</tr>
+<tr>
+<td class="cell">DNAVACCINESEQ</td><td class="cell">VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td>
+<td class="cell">316 - 324</td>
+<td class="cell"><tt>ASQGTKRSY</tt></td>
+<td class="cell">0</td>
+<td class="cell"><a href="#VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_316_324">0</a></td>
+</tr>
+<tr class="highlight">
+<td class="cell">DNAVACCINESEQ</td><td class="cell">VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td>
+<td class="cell">325 - 333</td>
+<td class="cell"><tt>NTDLEALME</tt></td>
+<td class="cell">0</td>
+<td class="cell"><a href="#VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_325_333">0</a></td>
+</tr>
+<tr>
+<td class="cell">DNAVACCINESEQ</td><td class="cell">VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td>
+<td class="cell">334 - 342</td>
+<td class="cell"><tt>NMDKAVKLY</tt></td>
+<td class="cell">0</td>
+<td class="cell"><a href="#VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_334_342">0</a></td>
+</tr>
+<tr class="highlight">
+<td class="cell">DNAVACCINESEQ</td><td class="cell">VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td>
+<td class="cell">343 - 351</td>
+<td class="cell"><tt>LSTASSWSY</tt></td>
+<td class="cell">0</td>
+<td class="cell"><a href="#VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_343_351">0</a></td>
+</tr>
+<tr>
+<td class="cell">DNAVACCINESEQ</td><td class="cell">VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td>
+<td class="cell">357 - 365</td>
+<td class="cell"><tt>GMIDGWYGY</tt></td>
+<td class="cell">0</td>
+<td class="cell"><a href="#VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_357_365">0</a></td>
+</tr>
+</table>
+</center>
+<br/><br/>
+<br/><br/>
+<center>
+<p>DB Version: April     19, 2018 &#160;&#160;|&#160;&#160; EPX Version: !!Other Error!!</p>
+<table class="tbl">
+<tr><th>Protein ID<br/><input id="expand_all_vaccine_epitopes_classi-ntc8684-erna41h-7soji" type="button" value="[+] Show Matches" onclick="toggle_all('vaccine_epitopes_classi-ntc8684-erna41h-7soji');"/></th><th>Protein Description</th><th>Start<br/>Position</th><th>Sequence</th><th>Number Of<br/>IVAX<br/>Matches*</th><th>Janus<br/>HMLGY<br/>Score<sup>**</sup></th>
+<th>SLAI-1_0101</th>
+<th>SLAI-1_0401</th>
+<th>SLAI-1_0701</th>
+<th>SLAI-1_0801</th>
+<th>SLAI-1_1201</th>
+<th>SLAI-1_1301</th>
+<th>SLAI-2_0101</th>
+<th>SLAI-2_0401</th>
+<th>SLAI-2_0501</th>
+<th>SLAI-2_1001</th>
+<th>SLAI-2_1201</th>
+<th>SLAI-3_0401</th>
+<th>SLAI-3_0501</th>
+<th>SLAI-3_0601</th>
+<th>SLAI-3_0701</th>
+</tr>
+<tr id="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_79_87" class="cluster_row"><td>VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td><td title="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI" >VACCINE_EPITOPES_CLASSI-NTC868...</td><td>79-87</td><td class="sequence left" >RIYQILAIY</td><td>0</td><td>0</td><td name="SLAI-1_0101" class="other_score">  .45</td><td name="SLAI-1_0401" class="top10"> 1.63</td><td name="SLAI-1_0701" class="top10"> 1.44</td><td name="SLAI-1_0801" class="top10"> 1.60</td><td name="SLAI-1_1201" class="top5"> 2.20</td><td name="SLAI-1_1301" class="top10"> 1.58</td><td name="SLAI-2_0101" class="top1"> 3.99</td><td name="SLAI-2_0401" class="top5"> 2.08</td><td name="SLAI-2_0501" class="other_score">  .62</td><td name="SLAI-2_1001" class="top5"> 1.86</td><td name="SLAI-2_1201" class="other_score">  .50</td><td name="SLAI-3_0401" class="other_score"> -.26</td><td name="SLAI-3_0501" class="other_score"> -.05</td><td name="SLAI-3_0601" class="other_score">  .01</td><td name="SLAI-3_0701" class="other_score">  .24</td></tr>
+<tr id="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_88_96" class="cluster_row"><td>VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td><td title="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI" >VACCINE_EPITOPES_CLASSI-NTC868...</td><td>88-96</td><td class="sequence left" >ITIGKCPKY</td><td>0</td><td>0</td><td name="SLAI-1_0101" class="other_score"> -.07</td><td name="SLAI-1_0401" class="top10"> 1.57</td><td name="SLAI-1_0701" class="top5"> 2.03</td><td name="SLAI-1_0801" class="other_score"> 1.07</td><td name="SLAI-1_1201" class="top5"> 1.66</td><td name="SLAI-1_1301" class="other_score">  .94</td><td name="SLAI-2_0101" class="top1"> 2.97</td><td name="SLAI-2_0401" class="top5"> 1.80</td><td name="SLAI-2_0501" class="top10"> 1.29</td><td name="SLAI-2_1001" class="other_score"> 1.12</td><td name="SLAI-2_1201" class="other_score">  .44</td><td name="SLAI-3_0401" class="other_score">  .27</td><td name="SLAI-3_0501" class="other_score">  .51</td><td name="SLAI-3_0601" class="other_score">  .33</td><td name="SLAI-3_0701" class="other_score">  .19</td></tr>
+<tr id="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_97_105" class="cluster_row"><td>VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td><td title="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI" >VACCINE_EPITOPES_CLASSI-NTC868...</td><td>97-105</td><td class="sequence left" >SLLTEVETY</td><td>0</td><td>0</td><td name="SLAI-1_0101" class="other_score">  .67</td><td name="SLAI-1_0401" class="top10"> 1.59</td><td name="SLAI-1_0701" class="other_score">  .90</td><td name="SLAI-1_0801" class="top10"> 1.61</td><td name="SLAI-1_1201" class="top5"> 1.85</td><td name="SLAI-1_1301" class="top5"> 1.75</td><td name="SLAI-2_0101" class="top1"> 3.78</td><td name="SLAI-2_0401" class="top10"> 1.31</td><td name="SLAI-2_0501" class="other_score">  .38</td><td name="SLAI-2_1001" class="other_score">  .87</td><td name="SLAI-2_1201" class="other_score">  .52</td><td name="SLAI-3_0401" class="other_score"> -.09</td><td name="SLAI-3_0501" class="other_score"> -.10</td><td name="SLAI-3_0601" class="other_score"> -.27</td><td name="SLAI-3_0701" class="other_score"> -.02</td></tr>
+<tr id="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_111_119" class="cluster_row"><td>VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td><td title="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI" >VACCINE_EPITOPES_CLASSI-NTC868...</td><td>111-119</td><td class="sequence left" >TSADQQSLY</td><td>0</td><td>0</td><td name="SLAI-1_0101" class="other_score">-1.12</td><td name="SLAI-1_0401" class="top10"> 1.64</td><td name="SLAI-1_0701" class="top5"> 1.82</td><td name="SLAI-1_0801" class="top10"> 1.58</td><td name="SLAI-1_1201" class="other_score">  .79</td><td name="SLAI-1_1301" class="top10"> 1.28</td><td name="SLAI-2_0101" class="top1"> 3.09</td><td name="SLAI-2_0401" class="top5"> 2.27</td><td name="SLAI-2_0501" class="top5"> 1.65</td><td name="SLAI-2_1001" class="other_score">  .84</td><td name="SLAI-2_1201" class="other_score">  .42</td><td name="SLAI-3_0401" class="other_score"> -.70</td><td name="SLAI-3_0501" class="other_score"> -.52</td><td name="SLAI-3_0601" class="other_score">  .04</td><td name="SLAI-3_0701" class="other_score"> -.43</td></tr>
+<tr id="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_125_133" class="cluster_row"><td>VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td><td title="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI" >VACCINE_EPITOPES_CLASSI-NTC868...</td><td>125-133</td><td class="sequence left" >EMNAPNYHY</td><td>0</td><td>0</td><td name="SLAI-1_0101" class="top10"> 1.36</td><td name="SLAI-1_0401" class="top5"> 2.02</td><td name="SLAI-1_0701" class="top5"> 2.05</td><td name="SLAI-1_0801" class="other_score"> 1.20</td><td name="SLAI-1_1201" class="top1"> 2.93</td><td name="SLAI-1_1301" class="top1"> 3.27</td><td name="SLAI-2_0101" class="top1"> 4.09</td><td name="SLAI-2_0401" class="top5"> 1.64</td><td name="SLAI-2_0501" class="top5"> 1.84</td><td name="SLAI-2_1001" class="other_score">  .98</td><td name="SLAI-2_1201" class="top10"> 1.44</td><td name="SLAI-3_0401" class="other_score"> -.93</td><td name="SLAI-3_0501" class="other_score"> -.92</td><td name="SLAI-3_0601" class="other_score">-1.44</td><td name="SLAI-3_0701" class="other_score"> -.70</td></tr>
+<tr id="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_134_142" class="cluster_row"><td>VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td><td title="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI" >VACCINE_EPITOPES_CLASSI-NTC868...</td><td>134-142</td><td class="sequence left" >LASCMGLIY</td><td>0</td><td>0</td><td name="SLAI-1_0101" class="other_score"> -.61</td><td name="SLAI-1_0401" class="other_score"> 1.08</td><td name="SLAI-1_0701" class="top1"> 2.70</td><td name="SLAI-1_0801" class="other_score">  .60</td><td name="SLAI-1_1201" class="other_score">  .64</td><td name="SLAI-1_1301" class="other_score">  .92</td><td name="SLAI-2_0101" class="top5"> 2.24</td><td name="SLAI-2_0401" class="top10"> 1.31</td><td name="SLAI-2_0501" class="top10"> 1.32</td><td name="SLAI-2_1001" class="other_score"> 1.26</td><td name="SLAI-2_1201" class="other_score"> -.81</td><td name="SLAI-3_0401" class="other_score"> -.11</td><td name="SLAI-3_0501" class="other_score"> -.29</td><td name="SLAI-3_0601" class="other_score"> -.19</td><td name="SLAI-3_0701" class="other_score">  .23</td></tr>
+<tr id="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_143_151" class="cluster_row"><td>VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td><td title="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI" >VACCINE_EPITOPES_CLASSI-NTC868...</td><td>143-151</td><td class="sequence left" >DTVNRTHQY</td><td>0</td><td>0</td><td name="SLAI-1_0101" class="other_score">  .00</td><td name="SLAI-1_0401" class="top5"> 1.71</td><td name="SLAI-1_0701" class="top5"> 1.69</td><td name="SLAI-1_0801" class="top10"> 1.29</td><td name="SLAI-1_1201" class="top10"> 1.59</td><td name="SLAI-1_1301" class="other_score">  .93</td><td name="SLAI-2_0101" class="top1"> 3.35</td><td name="SLAI-2_0401" class="top10"> 1.32</td><td name="SLAI-2_0501" class="other_score">  .29</td><td name="SLAI-2_1001" class="other_score"> -.31</td><td name="SLAI-2_1201" class="other_score">  .39</td><td name="SLAI-3_0401" class="other_score">-2.04</td><td name="SLAI-3_0501" class="other_score">-1.78</td><td name="SLAI-3_0601" class="other_score">-1.09</td><td name="SLAI-3_0701" class="other_score">-2.26</td></tr>
+<tr id="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_152_160" class="cluster_row"><td>VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td><td title="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI" >VACCINE_EPITOPES_CLASSI-NTC868...</td><td>152-160</td><td class="sequence left" >GTEKLTITY</td><td>0</td><td>0</td><td name="SLAI-1_0101" class="other_score">  .65</td><td name="SLAI-1_0401" class="top1"> 2.56</td><td name="SLAI-1_0701" class="top10"> 1.58</td><td name="SLAI-1_0801" class="other_score">  .41</td><td name="SLAI-1_1201" class="other_score"> 1.11</td><td name="SLAI-1_1301" class="top10"> 1.52</td><td name="SLAI-2_0101" class="top1"> 2.98</td><td name="SLAI-2_0401" class="top5"> 2.30</td><td name="SLAI-2_0501" class="other_score">  .57</td><td name="SLAI-2_1001" class="top10"> 1.53</td><td name="SLAI-2_1201" class="other_score">  .21</td><td name="SLAI-3_0401" class="other_score"> -.66</td><td name="SLAI-3_0501" class="other_score">-1.12</td><td name="SLAI-3_0601" class="other_score"> -.57</td><td name="SLAI-3_0701" class="other_score"> -.88</td></tr>
+<tr id="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_161_169" class="cluster_row"><td>VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td><td title="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI" >VACCINE_EPITOPES_CLASSI-NTC868...</td><td>161-169</td><td class="sequence left" >AFDERRNKY</td><td>0</td><td>0</td><td name="SLAI-1_0101" class="other_score">  .41</td><td name="SLAI-1_0401" class="top1"> 3.08</td><td name="SLAI-1_0701" class="other_score">  .60</td><td name="SLAI-1_0801" class="other_score">  .38</td><td name="SLAI-1_1201" class="other_score">  .52</td><td name="SLAI-1_1301" class="top1"> 2.34</td><td name="SLAI-2_0101" class="top1"> 3.41</td><td name="SLAI-2_0401" class="top5"> 1.71</td><td name="SLAI-2_0501" class="other_score">  .50</td><td name="SLAI-2_1001" class="other_score">  .17</td><td name="SLAI-2_1201" class="other_score">-1.00</td><td name="SLAI-3_0401" class="other_score">-1.53</td><td name="SLAI-3_0501" class="other_score">-2.17</td><td name="SLAI-3_0601" class="other_score">-1.25</td><td name="SLAI-3_0701" class="other_score">-1.11</td></tr>
+<tr id="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_170_178" class="cluster_row"><td>VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td><td title="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI" >VACCINE_EPITOPES_CLASSI-NTC868...</td><td>170-178</td><td class="sequence left" >DTVHDRTPY</td><td>0</td><td>0</td><td name="SLAI-1_0101" class="other_score"> -.17</td><td name="SLAI-1_0401" class="top5"> 1.75</td><td name="SLAI-1_0701" class="top5"> 1.64</td><td name="SLAI-1_0801" class="other_score">  .54</td><td name="SLAI-1_1201" class="other_score"> 1.27</td><td name="SLAI-1_1301" class="other_score">  .55</td><td name="SLAI-2_0101" class="top1"> 3.45</td><td name="SLAI-2_0401" class="other_score">  .88</td><td name="SLAI-2_0501" class="other_score"> -.21</td><td name="SLAI-2_1001" class="other_score">  .55</td><td name="SLAI-2_1201" class="other_score">  .14</td><td name="SLAI-3_0401" class="other_score">-1.24</td><td name="SLAI-3_0501" class="other_score">-1.09</td><td name="SLAI-3_0601" class="other_score">-1.29</td><td name="SLAI-3_0701" class="other_score">-1.40</td></tr>
+<tr id="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_179_187" class="cluster_row"><td>VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td><td title="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI" >VACCINE_EPITOPES_CLASSI-NTC868...</td><td>179-187</td><td class="sequence left" >LTEVETYVL</td><td>0</td><td>0</td><td name="SLAI-1_0101" class="top5"> 1.91</td><td name="SLAI-1_0401" class="top5"> 1.76</td><td name="SLAI-1_0701" class="other_score">  .33</td><td name="SLAI-1_0801" class="other_score"> -.14</td><td name="SLAI-1_1201" class="other_score">  .56</td><td name="SLAI-1_1301" class="top5"> 1.87</td><td name="SLAI-2_0101" class="other_score"> -.04</td><td name="SLAI-2_0401" class="top10"> 1.53</td><td name="SLAI-2_0501" class="top1"> 2.75</td><td name="SLAI-2_1001" class="other_score">  .76</td><td name="SLAI-2_1201" class="top10"> 1.48</td><td name="SLAI-3_0401" class="other_score"> 1.00</td><td name="SLAI-3_0501" class="other_score"> 1.12</td><td name="SLAI-3_0601" class="other_score">  .93</td><td name="SLAI-3_0701" class="other_score">  .89</td></tr>
+<tr id="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_193_201" class="cluster_row"><td>VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td><td title="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI" >VACCINE_EPITOPES_CLASSI-NTC868...</td><td>193-201</td><td class="sequence left" >SVKNGTYDY</td><td>0</td><td>0</td><td name="SLAI-1_0101" class="other_score">  .31</td><td name="SLAI-1_0401" class="top5"> 1.74</td><td name="SLAI-1_0701" class="other_score">  .90</td><td name="SLAI-1_0801" class="top10"> 1.40</td><td name="SLAI-1_1201" class="top5"> 2.21</td><td name="SLAI-1_1301" class="top5"> 1.83</td><td name="SLAI-2_0101" class="top1"> 3.88</td><td name="SLAI-2_0401" class="top10"> 1.56</td><td name="SLAI-2_0501" class="other_score">  .41</td><td name="SLAI-2_1001" class="other_score">  .40</td><td name="SLAI-2_1201" class="other_score"> 1.12</td><td name="SLAI-3_0401" class="other_score"> 1.16</td><td name="SLAI-3_0501" class="other_score"> 1.21</td><td name="SLAI-3_0601" class="other_score"> 1.10</td><td name="SLAI-3_0701" class="other_score">  .51</td></tr>
+<tr id="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_202_210" class="cluster_row"><td>VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td><td title="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI" >VACCINE_EPITOPES_CLASSI-NTC868...</td><td>202-210</td><td class="sequence left" >GTIKDRSPY</td><td>0</td><td>0</td><td name="SLAI-1_0101" class="other_score"> -.19</td><td name="SLAI-1_0401" class="top5"> 2.08</td><td name="SLAI-1_0701" class="top5"> 1.90</td><td name="SLAI-1_0801" class="other_score">  .76</td><td name="SLAI-1_1201" class="top5"> 1.78</td><td name="SLAI-1_1301" class="top10"> 1.31</td><td name="SLAI-2_0101" class="top1"> 3.59</td><td name="SLAI-2_0401" class="top10"> 1.44</td><td name="SLAI-2_0501" class="other_score">  .23</td><td name="SLAI-2_1001" class="top10"> 1.34</td><td name="SLAI-2_1201" class="other_score">  .80</td><td name="SLAI-3_0401" class="other_score"> -.49</td><td name="SLAI-3_0501" class="other_score">-1.11</td><td name="SLAI-3_0601" class="other_score"> -.09</td><td name="SLAI-3_0701" class="other_score"> -.64</td></tr>
+<tr id="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_211_219" class="cluster_row"><td>VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td><td title="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI" >VACCINE_EPITOPES_CLASSI-NTC868...</td><td>211-219</td><td class="sequence left" >NADTLCIGY</td><td>0</td><td>0</td><td name="SLAI-1_0101" class="other_score">  .65</td><td name="SLAI-1_0401" class="top1"> 2.40</td><td name="SLAI-1_0701" class="top5"> 1.69</td><td name="SLAI-1_0801" class="other_score">  .68</td><td name="SLAI-1_1201" class="other_score">  .83</td><td name="SLAI-1_1301" class="top10"> 1.55</td><td name="SLAI-2_0101" class="top1"> 2.66</td><td name="SLAI-2_0401" class="top5"> 2.15</td><td name="SLAI-2_0501" class="other_score"> 1.07</td><td name="SLAI-2_1001" class="other_score">  .61</td><td name="SLAI-2_1201" class="other_score"> -.32</td><td name="SLAI-3_0401" class="other_score">-1.67</td><td name="SLAI-3_0501" class="other_score"> -.68</td><td name="SLAI-3_0601" class="other_score">-1.50</td><td name="SLAI-3_0701" class="other_score">-1.26</td></tr>
+<tr id="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_225_233" class="cluster_row"><td>VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td><td title="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI" >VACCINE_EPITOPES_CLASSI-NTC868...</td><td>225-233</td><td class="sequence left" >GMVDGWYGY</td><td>0</td><td>0</td><td name="SLAI-1_0101" class="other_score">  .56</td><td name="SLAI-1_0401" class="top5"> 1.74</td><td name="SLAI-1_0701" class="top5"> 2.30</td><td name="SLAI-1_0801" class="top10"> 1.34</td><td name="SLAI-1_1201" class="top5"> 1.90</td><td name="SLAI-1_1301" class="top5"> 1.73</td><td name="SLAI-2_0101" class="top1"> 3.81</td><td name="SLAI-2_0401" class="other_score">  .90</td><td name="SLAI-2_0501" class="other_score">  .70</td><td name="SLAI-2_1001" class="top5"> 2.27</td><td name="SLAI-2_1201" class="other_score">  .41</td><td name="SLAI-3_0401" class="other_score"> -.45</td><td name="SLAI-3_0501" class="other_score"> -.98</td><td name="SLAI-3_0601" class="other_score"> -.60</td><td name="SLAI-3_0701" class="other_score"> -.56</td></tr>
+<tr id="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_234_242" class="cluster_row"><td>VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td><td title="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI" >VACCINE_EPITOPES_CLASSI-NTC868...</td><td>234-242</td><td class="sequence left" >CTELKLSDY</td><td>0</td><td>0</td><td name="SLAI-1_0101" class="other_score"> -.55</td><td name="SLAI-1_0401" class="top10"> 1.44</td><td name="SLAI-1_0701" class="top5"> 2.30</td><td name="SLAI-1_0801" class="other_score"> -.39</td><td name="SLAI-1_1201" class="other_score">  .36</td><td name="SLAI-1_1301" class="other_score"> 1.21</td><td name="SLAI-2_0101" class="top5"> 1.77</td><td name="SLAI-2_0401" class="top1"> 2.78</td><td name="SLAI-2_0501" class="top5"> 1.91</td><td name="SLAI-2_1001" class="other_score"> -.23</td><td name="SLAI-2_1201" class="other_score"> -.62</td><td name="SLAI-3_0401" class="other_score"> -.92</td><td name="SLAI-3_0501" class="other_score">-1.14</td><td name="SLAI-3_0601" class="other_score"> -.25</td><td name="SLAI-3_0701" class="other_score">-1.16</td></tr>
+<tr id="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_248_256" class="cluster_row"><td>VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td><td title="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI" >VACCINE_EPITOPES_CLASSI-NTC868...</td><td>248-256</td><td class="sequence left" >VSDGGPNLY</td><td>0</td><td>0</td><td name="SLAI-1_0101" class="other_score"> -.34</td><td name="SLAI-1_0401" class="top5"> 2.20</td><td name="SLAI-1_0701" class="other_score">  .76</td><td name="SLAI-1_0801" class="other_score">  .28</td><td name="SLAI-1_1201" class="other_score"> -.09</td><td name="SLAI-1_1301" class="top5"> 1.70</td><td name="SLAI-2_0101" class="top1"> 2.50</td><td name="SLAI-2_0401" class="top1"> 2.75</td><td name="SLAI-2_0501" class="top5"> 1.93</td><td name="SLAI-2_1001" class="other_score"> -.06</td><td name="SLAI-2_1201" class="other_score"> -.51</td><td name="SLAI-3_0401" class="other_score">-1.62</td><td name="SLAI-3_0501" class="other_score">-1.37</td><td name="SLAI-3_0601" class="other_score"> -.85</td><td name="SLAI-3_0701" class="other_score">-1.20</td></tr>
+<tr id="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_257_265" class="cluster_row"><td>VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td><td title="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI" >VACCINE_EPITOPES_CLASSI-NTC868...</td><td>257-265</td><td class="sequence left" >EICPKLAEY</td><td>0</td><td>0</td><td name="SLAI-1_0101" class="other_score">  .64</td><td name="SLAI-1_0401" class="top5"> 1.82</td><td name="SLAI-1_0701" class="other_score"> 1.19</td><td name="SLAI-1_0801" class="other_score"> 1.10</td><td name="SLAI-1_1201" class="top1"> 2.42</td><td name="SLAI-1_1301" class="top5"> 1.88</td><td name="SLAI-2_0101" class="top1"> 4.06</td><td name="SLAI-2_0401" class="top5"> 2.08</td><td name="SLAI-2_0501" class="other_score">  .76</td><td name="SLAI-2_1001" class="other_score">  .11</td><td name="SLAI-2_1201" class="other_score">  .72</td><td name="SLAI-3_0401" class="other_score">-1.96</td><td name="SLAI-3_0501" class="other_score">-1.43</td><td name="SLAI-3_0601" class="other_score">-1.69</td><td name="SLAI-3_0701" class="other_score">-1.30</td></tr>
+<tr id="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_266_274" class="cluster_row"><td>VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td><td title="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI" >VACCINE_EPITOPES_CLASSI-NTC868...</td><td>266-274</td><td class="sequence left" >KSCINRCFY</td><td>0</td><td>0</td><td name="SLAI-1_0101" class="other_score">-1.00</td><td name="SLAI-1_0401" class="top10"> 1.64</td><td name="SLAI-1_0701" class="other_score">  .04</td><td name="SLAI-1_0801" class="other_score">  .38</td><td name="SLAI-1_1201" class="other_score">  .44</td><td name="SLAI-1_1301" class="other_score">  .70</td><td name="SLAI-2_0101" class="top1"> 3.76</td><td name="SLAI-2_0401" class="other_score">  .75</td><td name="SLAI-2_0501" class="other_score">  .57</td><td name="SLAI-2_1001" class="top10"> 1.42</td><td name="SLAI-2_1201" class="other_score">  .84</td><td name="SLAI-3_0401" class="other_score"> -.73</td><td name="SLAI-3_0501" class="other_score">-1.07</td><td name="SLAI-3_0601" class="other_score"> -.96</td><td name="SLAI-3_0701" class="other_score">  .01</td></tr>
+<tr id="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_275_283" class="cluster_row"><td>VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td><td title="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI" >VACCINE_EPITOPES_CLASSI-NTC868...</td><td>275-283</td><td class="sequence left" >QVSRPMFLY</td><td>0</td><td>0</td><td name="SLAI-1_0101" class="other_score">  .79</td><td name="SLAI-1_0401" class="top5"> 2.26</td><td name="SLAI-1_0701" class="top5"> 2.20</td><td name="SLAI-1_0801" class="top10"> 1.34</td><td name="SLAI-1_1201" class="top5"> 2.20</td><td name="SLAI-1_1301" class="top1"> 2.76</td><td name="SLAI-2_0101" class="top1"> 3.56</td><td name="SLAI-2_0401" class="top5"> 1.76</td><td name="SLAI-2_0501" class="top5"> 1.93</td><td name="SLAI-2_1001" class="other_score">  .41</td><td name="SLAI-2_1201" class="other_score"> 1.27</td><td name="SLAI-3_0401" class="other_score"> -.14</td><td name="SLAI-3_0501" class="other_score"> -.23</td><td name="SLAI-3_0601" class="other_score">  .11</td><td name="SLAI-3_0701" class="other_score">  .19</td></tr>
+<tr id="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_284_292" class="cluster_row"><td>VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td><td title="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI" >VACCINE_EPITOPES_CLASSI-NTC868...</td><td>284-292</td><td class="sequence left" >GAKEVALSY</td><td>0</td><td>0</td><td name="SLAI-1_0101" class="other_score"> -.95</td><td name="SLAI-1_0401" class="other_score">  .67</td><td name="SLAI-1_0701" class="top10"> 1.31</td><td name="SLAI-1_0801" class="other_score">  .74</td><td name="SLAI-1_1201" class="other_score"> 1.00</td><td name="SLAI-1_1301" class="other_score"> -.12</td><td name="SLAI-2_0101" class="top1"> 2.80</td><td name="SLAI-2_0401" class="other_score"> -.03</td><td name="SLAI-2_0501" class="other_score"> -.78</td><td name="SLAI-2_1001" class="other_score">  .89</td><td name="SLAI-2_1201" class="other_score"> -.45</td><td name="SLAI-3_0401" class="other_score">  .46</td><td name="SLAI-3_0501" class="other_score">  .05</td><td name="SLAI-3_0601" class="other_score">  .57</td><td name="SLAI-3_0701" class="other_score"> -.24</td></tr>
+<tr id="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_298_306" class="cluster_row"><td>VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td><td title="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI" >VACCINE_EPITOPES_CLASSI-NTC868...</td><td>298-306</td><td class="sequence left" >ELDAPNYHY</td><td>0</td><td>0</td><td name="SLAI-1_0101" class="top1"> 2.35</td><td name="SLAI-1_0401" class="top1"> 2.97</td><td name="SLAI-1_0701" class="top10"> 1.37</td><td name="SLAI-1_0801" class="other_score">  .16</td><td name="SLAI-1_1201" class="top5"> 2.23</td><td name="SLAI-1_1301" class="top1"> 4.06</td><td name="SLAI-2_0101" class="top1"> 3.85</td><td name="SLAI-2_0401" class="top1"> 2.39</td><td name="SLAI-2_0501" class="top1"> 2.53</td><td name="SLAI-2_1001" class="other_score">  .39</td><td name="SLAI-2_1201" class="other_score">  .67</td><td name="SLAI-3_0401" class="other_score">-1.54</td><td name="SLAI-3_0501" class="other_score">-1.57</td><td name="SLAI-3_0601" class="other_score">-2.05</td><td name="SLAI-3_0701" class="other_score">-1.12</td></tr>
+<tr id="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_307_315" class="cluster_row"><td>VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td><td title="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI" >VACCINE_EPITOPES_CLASSI-NTC868...</td><td>307-315</td><td class="sequence left" >DLLENLQAY</td><td>0</td><td>0</td><td name="SLAI-1_0101" class="other_score">  .60</td><td name="SLAI-1_0401" class="other_score"> 1.17</td><td name="SLAI-1_0701" class="other_score"> 1.18</td><td name="SLAI-1_0801" class="other_score">  .81</td><td name="SLAI-1_1201" class="top5"> 1.80</td><td name="SLAI-1_1301" class="top5"> 1.88</td><td name="SLAI-2_0101" class="top1"> 3.50</td><td name="SLAI-2_0401" class="other_score">  .88</td><td name="SLAI-2_0501" class="other_score">  .54</td><td name="SLAI-2_1001" class="other_score">  .16</td><td name="SLAI-2_1201" class="other_score"> -.23</td><td name="SLAI-3_0401" class="other_score">-1.10</td><td name="SLAI-3_0501" class="other_score"> -.66</td><td name="SLAI-3_0601" class="other_score"> -.99</td><td name="SLAI-3_0701" class="other_score">-1.10</td></tr>
+<tr id="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_316_324" class="cluster_row"><td>VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td><td title="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI" >VACCINE_EPITOPES_CLASSI-NTC868...</td><td>316-324</td><td class="sequence left" >ASQGTKRSY</td><td>0</td><td>0</td><td name="SLAI-1_0101" class="other_score"> -.59</td><td name="SLAI-1_0401" class="top5"> 1.78</td><td name="SLAI-1_0701" class="other_score">  .50</td><td name="SLAI-1_0801" class="other_score"> -.04</td><td name="SLAI-1_1201" class="other_score">  .83</td><td name="SLAI-1_1301" class="other_score">  .57</td><td name="SLAI-2_0101" class="top1"> 2.70</td><td name="SLAI-2_0401" class="top10"> 1.35</td><td name="SLAI-2_0501" class="other_score">  .17</td><td name="SLAI-2_1001" class="other_score">  .75</td><td name="SLAI-2_1201" class="other_score">  .04</td><td name="SLAI-3_0401" class="other_score"> -.64</td><td name="SLAI-3_0501" class="other_score">-1.27</td><td name="SLAI-3_0601" class="other_score">-1.03</td><td name="SLAI-3_0701" class="other_score"> -.68</td></tr>
+<tr id="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_325_333" class="cluster_row"><td>VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td><td title="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI" >VACCINE_EPITOPES_CLASSI-NTC868...</td><td>325-333</td><td class="sequence left" >NTDLEALME</td><td>0</td><td>0</td><td name="SLAI-1_0101" class="other_score">  .91</td><td name="SLAI-1_0401" class="top10"> 1.30</td><td name="SLAI-1_0701" class="other_score"> -.09</td><td name="SLAI-1_0801" class="other_score"> -.70</td><td name="SLAI-1_1201" class="other_score">  .05</td><td name="SLAI-1_1301" class="other_score"> 1.20</td><td name="SLAI-2_0101" class="other_score">  .71</td><td name="SLAI-2_0401" class="top5"> 2.23</td><td name="SLAI-2_0501" class="top10"> 1.50</td><td name="SLAI-2_1001" class="other_score"> -.47</td><td name="SLAI-2_1201" class="other_score">  .57</td><td name="SLAI-3_0401" class="other_score"> -.97</td><td name="SLAI-3_0501" class="other_score"> -.04</td><td name="SLAI-3_0601" class="other_score"> -.86</td><td name="SLAI-3_0701" class="other_score"> -.51</td></tr>
+<tr id="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_334_342" class="cluster_row"><td>VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td><td title="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI" >VACCINE_EPITOPES_CLASSI-NTC868...</td><td>334-342</td><td class="sequence left" >NMDKAVKLY</td><td>0</td><td>0</td><td name="SLAI-1_0101" class="top10"> 1.57</td><td name="SLAI-1_0401" class="top1"> 2.61</td><td name="SLAI-1_0701" class="other_score"> 1.16</td><td name="SLAI-1_0801" class="other_score">  .36</td><td name="SLAI-1_1201" class="top5"> 1.96</td><td name="SLAI-1_1301" class="top1"> 2.81</td><td name="SLAI-2_0101" class="top1"> 3.11</td><td name="SLAI-2_0401" class="top1"> 2.95</td><td name="SLAI-2_0501" class="top5"> 2.04</td><td name="SLAI-2_1001" class="other_score">  .67</td><td name="SLAI-2_1201" class="other_score">  .18</td><td name="SLAI-3_0401" class="other_score">-1.77</td><td name="SLAI-3_0501" class="other_score"> -.85</td><td name="SLAI-3_0601" class="other_score">-2.01</td><td name="SLAI-3_0701" class="other_score">-1.37</td></tr>
+<tr id="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_343_351" class="cluster_row"><td>VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td><td title="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI" >VACCINE_EPITOPES_CLASSI-NTC868...</td><td>343-351</td><td class="sequence left" >LSTASSWSY</td><td>0</td><td>0</td><td name="SLAI-1_0101" class="other_score">-1.30</td><td name="SLAI-1_0401" class="other_score">  .43</td><td name="SLAI-1_0701" class="top5"> 1.80</td><td name="SLAI-1_0801" class="other_score">  .52</td><td name="SLAI-1_1201" class="other_score">  .39</td><td name="SLAI-1_1301" class="other_score">  .98</td><td name="SLAI-2_0101" class="top1"> 2.50</td><td name="SLAI-2_0401" class="top5"> 1.87</td><td name="SLAI-2_0501" class="top5"> 1.89</td><td name="SLAI-2_1001" class="top10"> 1.60</td><td name="SLAI-2_1201" class="other_score">  .27</td><td name="SLAI-3_0401" class="other_score"> -.27</td><td name="SLAI-3_0501" class="other_score"> -.09</td><td name="SLAI-3_0601" class="other_score"> -.41</td><td name="SLAI-3_0701" class="other_score"> -.01</td></tr>
+<tr id="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI_357_365" class="cluster_row"><td>VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI</td><td title="VACCINE_EPITOPES_CLASSI-NTC8684-ERNA41H-7SOJI" >VACCINE_EPITOPES_CLASSI-NTC868...</td><td>357-365</td><td class="sequence left" >GMIDGWYGY</td><td>0</td><td>0</td><td name="SLAI-1_0101" class="other_score">  .78</td><td name="SLAI-1_0401" class="top5"> 1.97</td><td name="SLAI-1_0701" class="top5"> 2.27</td><td name="SLAI-1_0801" class="top10"> 1.37</td><td name="SLAI-1_1201" class="top5"> 2.26</td><td name="SLAI-1_1301" class="top5"> 2.21</td><td name="SLAI-2_0101" class="top1"> 4.03</td><td name="SLAI-2_0401" class="top10"> 1.36</td><td name="SLAI-2_0501" class="other_score"> 1.16</td><td name="SLAI-2_1001" class="top5"> 2.24</td><td name="SLAI-2_1201" class="other_score">  .78</td><td name="SLAI-3_0401" class="other_score">  .02</td><td name="SLAI-3_0501" class="other_score"> -.47</td><td name="SLAI-3_0601" class="other_score"> -.12</td><td name="SLAI-3_0701" class="other_score"> -.08</td></tr>
+</table></center>
+<div style="text-align:left">
+         <p><sup>*</sup> Count of IVAX JanusMatrix matches found in the search database.  A JanusMatrix match is a 9-mer/10-,er derived from the search database (typically the human genome) which shares TCR facing contacts with an EpiMatrix Hit (a 9-mer/10-mer peptide predicted to bind to at least one HLA) contained in the input sequence and which is predicted to bind to the same allele as an EpiMatrix Hit.<br/><br/><sup>**</sup> Janus Homology Score represents the average depth of coverage in the search database for each EpiMatrix hit in the input sequence. With respect to a given EpiMatrix Hit (a 9-mer/10-mer contained within the input sequence which is predicted to bind to a specific allele), a Janus Matrix Hit is a 9-mer/10-mer derived from the search database (typically the human genome) which is predicted to bind to the same allele as the EpiMatrix Hit and shares TCR facing contacts with the EpiMatrix Hit.
+         For example, an input peptide with eight EpiMatrix hits, all of which have one match in the search database, has a Janus Homology Score of 1. An input peptide with four EpiMatrix Hits, all of which have two matches in the search database, has a Janus Homology Score of 2.<br/><br/></p></div>
+</body></html>

@@ -1,0 +1,9 @@
+{
+    "path" : "~/Desktop/BigDataFinalProject/data_postprocess/H1N1_swineIAV_postanalysis",
+    "sortOrder" : [
+        {
+            "ascending" : true,
+            "columnIndex" : 2
+        }
+    ]
+}

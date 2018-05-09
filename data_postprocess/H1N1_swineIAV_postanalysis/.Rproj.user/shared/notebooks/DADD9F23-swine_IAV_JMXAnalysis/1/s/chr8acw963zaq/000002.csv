@@ -1,0 +1,2 @@
+"0","n_occur_clsII <- data.frame(table(jmx_data_all_clsII$Sequence))"
+"0","n_occur_clsII <- n_occur_clsII[order(-n_occur_clsII$Freq),]"

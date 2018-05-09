@@ -1,0 +1,2 @@
+"0","jmx_overlap <- jmx_data_all_clsI_freq$Var1 %in% jmx_data_all_clsII_freq$Var1"
+"0","jmx_common <- jmx_data_all_clsI_freq[jmx_overlap,]"

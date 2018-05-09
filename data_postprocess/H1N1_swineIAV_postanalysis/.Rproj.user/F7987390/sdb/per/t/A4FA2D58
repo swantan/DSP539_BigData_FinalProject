@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1524506336889.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "A4FA2D58",
+    "lastKnownWriteTime" : 4448292544,
+    "last_content_update" : 1524506336889,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "1DD424E7",
+        "caption" : "epicctop10_clsI",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=epicctop10_clsI&cache_key=1DD424E7",
+        "displayedObservations" : "160",
+        "environment" : "",
+        "object" : "epicctop10_clsI",
+        "preview" : "0",
+        "totalObservations" : "160",
+        "variables" : "3"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

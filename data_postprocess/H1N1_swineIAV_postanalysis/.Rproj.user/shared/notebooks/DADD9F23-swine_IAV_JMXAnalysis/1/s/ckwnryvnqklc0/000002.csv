@@ -1,0 +1,4 @@
+"0","epicc_data_clsII_top10_all <- rbind.data.frame(epicc_data_1_clsII_top10,epicc_data_2_clsII_top10,"
+"0","                                               epicc_data_3_clsII_top10,epicc_data_4_clsII_top10,"
+"0","                                               epicc_data_5_clsII_top10,epicc_data_6_clsII_top10,"
+"0","                                               epicc_data_7_clsII_top10,epicc_data_8_clsII_top10)"
