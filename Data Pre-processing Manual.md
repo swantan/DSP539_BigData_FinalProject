@@ -30,7 +30,7 @@
 
 | DNA fasta files | Protein sequence file (.pep) |<br/>
 
-| --- |--- |<br/>
+| --- | --- |<br/>
 
 | 1.fasta | swinefluH1N1_segment1_PB2.pep |<br/>
 | 2.fasta | swinefluH1N1_segment2_PB1.pep |<br/>
