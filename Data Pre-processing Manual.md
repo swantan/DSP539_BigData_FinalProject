@@ -28,6 +28,13 @@
 → Save the translated result as swinefluH1N1_segment4_HA.pep in  seq_tosubmit/ folder.<br/>
 *Table 1. Naming format of the file after sequence translation*<br/>
 
+|   |   |   |   |   |
+|---|---|---|---|---|
+|   |   |   |   |   |
+|   |   |   |   |   |
+|   |   |   |   |   |
+
+
 | DNA fasta files | Protein sequence file (.pep) |<br/>
 | --- | --- |<br/>
 | 1.fasta | swinefluH1N1_segment1_PB2.pep |<br/>
@@ -40,21 +47,22 @@
 | 8.fasta | swinefluH1N1_segment8_NS.pep |<br/>
 
 10.	To remove stop codons ‘\*’ and before doing so, screen through the file by searching ‘\*’. You are expected to have a total of 72 ‘\*’ (one stop codon for one sequence in a .pep file) but if more than 72 meaning there are some sequences that are not chosen from the best ORF. Screen through every sequences in the file and inspect manually for sequences that have more than one stop codons ‘\*’, then choose other reading frame for the particular sequences and/or blast its nucleotide sequences against the respective amino acid sequences to obtain only the coding region (CDS).<br/>
- a. Take note especially for this sequence: _‘gb:MF116358’ (A/swine/Kansas/A01378027/2017)_<br/>
+* a. Take note especially for this sequence: _‘gb:MF116358’ (A/swine/Kansas/A01378027/2017)_<br/>
  Chose reading frame 3<br/> 
 
 >\>rf 3 gb:MF116358|Organism:Influenza A virus (A/swine/Kansas/A01378027/2017(H1N1))|Strain Name:A/swine/Kansas/A01378027/2017|Segment:4|Subtype:H1N1|Host:Swine QKQGKTKATKMKAILVVLLYTFTTANADTLCIGYHANNSTDTVDTVLEKNVTVTHSVNLL EDKHNGKLCKLRGVAPLHLGKCNIAGWILGNPECESLSTASSWSYIVETSNSDNGTCYPG DFINYEELREQLSSVSSFERFEIFPKTSSWPNHDSNKGVTAACPHAGAKSFYKNLIWLVK KGNSYPKLNQSYINDKGKKVLVLWGIHHPSTTADQQSLYQNADAYVFVGTSRYSKKFKPE IATRPKVRDQEGRMNYYWTLVEPGDKITFEATGNLVVPRYAFTMERNAGSGIIISDTPVH DCNTTCQTPEGAINTSLPFQNIHPITIGKCPKYVKSTKLRLATGLRNVPSIQSRGLFGAI AGFIEGGWTGMVDGWYGYHHQNEQGSGYAADLKSTQNAIDKITNKVNSVIEKMNTQFTAV GKEFNHLEKRIENLNKKVDDGFLDIWTYNAELLVLLENERTLDYHDSNVKNLYEKVRNQL KNNAKEIGNGCFEFYHKCDNTCMESVKNGTYDYPKYSEEAKLNREKIDGVKLESTRIYQI LAIYSTVASSLVLVVSLGAISFWMCSNGSLQCRICI*H*DFR<br/>
 
- b. Perform [blastx](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PROGRAM=blastx&PAGE_TYPE=BlastSearch&LINK_LOC=blasthome) to be certain of the sequence CDS (screenshot) which started with ‘MKAILVVLLYTF’ and ended with ‘SLQCRICI’.<br/>
+* b. Perform [blastx](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PROGRAM=blastx&PAGE_TYPE=BlastSearch&LINK_LOC=blasthome) to be certain of the sequence CDS (screenshot) which started with ‘MKAILVVLLYTF’ and ended with ‘SLQCRICI’.<br/>
 ![blastx result](/2.data_preprocess/blastx.png)<br/> 
 
- c. Then, make necessary edits to the ‘problematic’ sequence, i.e. trim away ‘QKQGKTKATK’ and ‘H\*DFR’<br/>
+* c. Then, make necessary edits to the ‘problematic’ sequence, i.e. trim away ‘QKQGKTKATK’ and ‘H\*DFR’<br/>
  Showing before and after (see attached screenshots) removing \* in ‘swinefluH1N1_segment4_HA.pep’<br/>
  **Before**<br/>
  ![sequence edit 1](/2.data_preprocess/seq_edit1.png)<br/>
 
  **After**<br/>
  ![sequence edit 2](/2.data_preprocess/seq_edit2.png)<br/>
+ 
 11.	Proceed to removing the 72 ‘\*’ and save the file following the format in Table 1.<br/>
 12.	Repeat step 8 - 10 for the remaining 7 other proteins.<br/>
 13.	Next, modify and shorten the header. The reason being, there are certain criteria that has to comply for a file to be successfully uploaded to the web-based toolkit.<br/>
@@ -62,6 +70,7 @@
 •	File to be uploaded should be in .pep format, in which the files were all saved as .pep according to Table 1.<br/>
 •	Sequence headers should only contain two special characters, ‘/’ and ‘-’. Other characters such as ‘:’, ‘.’, ‘|’, ‘*’ etc will throw an error.<br/>
 •	Sequence header should be kept short.<br/>
+
 14.	Now, to further edit sequence headers, loop through all 8 file to make the following modification, i.e. shorten sequence header:<br/>
 ```cd ../seq_tosubmit/```<br/>
 ```{awk }
@@ -74,6 +83,7 @@ done; done
 * ```mkdir seq_foruse```<br/>
 * ```mv swinefluH1N1_segment1_PB2_v2.pep swinefluH1N1_segment2_PB1_v2.pep swinefluH1N1_segment3_PA_v2.pep swinefluH1N1_segment4_HA_v2.pep swinefluH1N1_segment5_NP_v2.pep swinefluH1N1_segment6_NA_v2.pep swinefluH1N1_segment7_M_v2.pep swinefluH1N1_segment8_NS_v2.pep seq_foruse/```<br/>
 * ```rm *v2.pep```<br/>
+
 15.	```cd seq_foruse/```<br/>
 16.	Manually further edit sequence header using vi editor<br/>
 * ```vi <filename>```<br/>
