@@ -12,9 +12,9 @@ By using the previous published swine DNA vaccine as reference, the collaborator
 ## Analysis Workflow 
 This analysis is divided into 3 main stages:
 1. Data pre-processing (R, Python)
-2. Subsequent data analysis using a web-based immunoinformatics tool
-   *EpiCC (Epitope Content Comparison)
-   *JMX (JanusMatrix) 
+2. Subsequent data analysis using a web-based immunoinformatics tool<br/>
+   *EpiCC (Epitope Content Comparison)<br/>
+   *JMX (JanusMatrix)<br/>
 3. Post data processing and analysis (R)
 
 ## Folders Description
