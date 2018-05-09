@@ -29,9 +29,7 @@
 *Table 1. Naming format of the file after sequence translation*<br/>
 
 | DNA fasta files | Protein sequence file (.pep) |<br/>
-
 | --- | --- |<br/>
-
 | 1.fasta | swinefluH1N1_segment1_PB2.pep |<br/>
 | 2.fasta | swinefluH1N1_segment2_PB1.pep |<br/>
 | 3.fasta | swinefluH1N1_segment3_PA.pep |<br/>
@@ -41,13 +39,15 @@
 | 7.fasta | swinefluH1N1_segment7_M.pep |<br/>
 | 8.fasta | swinefluH1N1_segment8_NS.pep |<br/>
 
-10.	To remove stop codons ‘*’ and before doing so, screen through the file by searching ‘*’. You are expected to have a total of 72 ‘*’ (one stop codon for one sequence in a .pep file) but if more than 72 meaning there are some sequences that are not chosen from the best ORF. Screen through every sequences in the file and inspect manually for sequences that have more than one stop codons ‘*’, then choose other reading frame for the particular sequences and/or blast its nucleotide sequences against the respective amino acid sequences to obtain only the coding region (CDS).<br/>
-Take note especially for this sequence: _‘gb:MF116358’ (A/swine/Kansas/A01378027/2017)_<br/>
-Chose reading frame 3<br/> 
+10.	To remove stop codons ‘\*’ and before doing so, screen through the file by searching ‘\*’. You are expected to have a total of 72 ‘\*’ (one stop codon for one sequence in a .pep file) but if more than 72 meaning there are some sequences that are not chosen from the best ORF. Screen through every sequences in the file and inspect manually for sequences that have more than one stop codons ‘\*’, then choose other reading frame for the particular sequences and/or blast its nucleotide sequences against the respective amino acid sequences to obtain only the coding region (CDS).<br/>
+
+ *Take note especially for this sequence: _‘gb:MF116358’ (A/swine/Kansas/A01378027/2017)_<br/>
+ *Chose reading frame 3<br/> 
+
 >\>rf 3 gb:MF116358|Organism:Influenza A virus (A/swine/Kansas/A01378027/2017(H1N1))|Strain Name:A/swine/Kansas/A01378027/2017|Segment:4|Subtype:H1N1|Host:Swine QKQGKTKATKMKAILVVLLYTFTTANADTLCIGYHANNSTDTVDTVLEKNVTVTHSVNLL EDKHNGKLCKLRGVAPLHLGKCNIAGWILGNPECESLSTASSWSYIVETSNSDNGTCYPG DFINYEELREQLSSVSSFERFEIFPKTSSWPNHDSNKGVTAACPHAGAKSFYKNLIWLVK KGNSYPKLNQSYINDKGKKVLVLWGIHHPSTTADQQSLYQNADAYVFVGTSRYSKKFKPE IATRPKVRDQEGRMNYYWTLVEPGDKITFEATGNLVVPRYAFTMERNAGSGIIISDTPVH DCNTTCQTPEGAINTSLPFQNIHPITIGKCPKYVKSTKLRLATGLRNVPSIQSRGLFGAI AGFIEGGWTGMVDGWYGYHHQNEQGSGYAADLKSTQNAIDKITNKVNSVIEKMNTQFTAV GKEFNHLEKRIENLNKKVDDGFLDIWTYNAELLVLLENERTLDYHDSNVKNLYEKVRNQL KNNAKEIGNGCFEFYHKCDNTCMESVKNGTYDYPKYSEEAKLNREKIDGVKLESTRIYQI LAIYSTVASSLVLVVSLGAISFWMCSNGSLQCRICI*H*DFR<br/>
 
-and also perform [blastx](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PROGRAM=blastx&PAGE_TYPE=BlastSearch&LINK_LOC=blasthome) to be certain of the sequence CDS (screenshot)<br/>
-![GitHub Logo](/images/logo.png) 
+*Perform [blastx](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PROGRAM=blastx&PAGE_TYPE=BlastSearch&LINK_LOC=blasthome) to be certain of the sequence CDS (screenshot)<br/>
+![blastx result](/2.data_preprocess/blastx.png) 
 which is started with ‘MKAILVVLLYTF’ and ended with ‘SLQCRICI’.<br/>
 Then, make necessary edits to the ‘problematic’ sequence, i.e. trim away ‘QKQGKTKATK’ and ‘H*DFR’<br/>
 Showing before and after (see attached screenshots) removing * in ‘swinefluH1N1_segment4_HA.pep’<br/>
