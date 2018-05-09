@@ -20,7 +20,7 @@ This analysis is divided into 3 main stages:
 ## Folders Description
 *Follow the numbering of each folders*
 
-**Part I** 
+**Part I** <br/>
 Folder: 1.dataset - A placeholder to put all original/raw files<br/>
 Contents:<br/>
 1. H1N1_swineIAV.FASTA
@@ -29,14 +29,14 @@ Contents:<br/>
 4. vaccine_epitopes_classI.pep
 5. vaccine_epitopes_classII.pep
 
-**Part II**
+**Part II**<br/>
 Folder: 2.data_preprocess - A working folder to put all input / output files that are related to data preprocessing part<br/>
 Manual to follow: 'Data Pre-processing Manual.md' 
 
-**Part III**
+**Part III**<br/>
 Folder: 3.seq_tosubmit - A placeholder and also a working folder to put all files that are ready to be uploaded to the web-based tool
 
-**Part IV**
+**Part IV**<br/>
 Folder: 4.data_postprocess - A placeholder to put all web-based downloaded files and also serve as working folder for post data analysis<br/>
 Contents:<br/>
 1. R project
