@@ -28,7 +28,7 @@
 → Save the translated result as swinefluH1N1_segment4_HA.pep in  seq_tosubmit/ folder.<br/>
 *Table 1. Naming format of the file after sequence translation*<br/>
 | DNA fasta files | Protein sequence file (.pep) |<br/>
-| ----------------|------------------------------|<br/>
+| --- |--- |<br/>
 | 1.fasta | swinefluH1N1_segment1_PB2.pep |<br/>
 | 2.fasta | swinefluH1N1_segment2_PB1.pep |<br/>
 | 3.fasta | swinefluH1N1_segment3_PA.pep |<br/>
