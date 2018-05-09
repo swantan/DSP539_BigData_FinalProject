@@ -24,7 +24,7 @@
 7.	Gather all sequences that needed to be translated<br/>
 ```mkdir ../seq_tosubmit/totranslate```<br/>
 ```mv *.fasta ../seq_tosubmit/totranslate```<br/>
-8.	Translate each DNA fasta files on a web-based translational tool [GitHub](http://www.bioinformatics.org/sms2/translate.html) by copying and pasting the DNA sequences.<br/>
+8.	Translate each DNA fasta files on a [web-based translational tool](http://www.bioinformatics.org/sms2/translate.html) by copying and pasting the DNA sequences.<br/>
 → Opt for open reading fram (ORF) 1 for complete protein sequence translation and click the button ‘submit’, taking _4.fasta_ (HA protein) as an example.<br/>
 → Save the translated result as swinefluH1N1_segment4_HA.pep in  seq_tosubmit/ folder.<br/>
 *Table 1. Naming format of the file after sequence translation*<br/>
@@ -44,7 +44,7 @@ Take note especially for this sequence: _‘gb:MF116358’ (A/swine/Kansas/A0137
 Chose reading frame 3<br/> 
 >\>rf 3 gb:MF116358|Organism:Influenza A virus (A/swine/Kansas/A01378027/2017(H1N1))|Strain Name:A/swine/Kansas/A01378027/2017|Segment:4|Subtype:H1N1|Host:Swine QKQGKTKATKMKAILVVLLYTFTTANADTLCIGYHANNSTDTVDTVLEKNVTVTHSVNLL EDKHNGKLCKLRGVAPLHLGKCNIAGWILGNPECESLSTASSWSYIVETSNSDNGTCYPG DFINYEELREQLSSVSSFERFEIFPKTSSWPNHDSNKGVTAACPHAGAKSFYKNLIWLVK KGNSYPKLNQSYINDKGKKVLVLWGIHHPSTTADQQSLYQNADAYVFVGTSRYSKKFKPE IATRPKVRDQEGRMNYYWTLVEPGDKITFEATGNLVVPRYAFTMERNAGSGIIISDTPVH DCNTTCQTPEGAINTSLPFQNIHPITIGKCPKYVKSTKLRLATGLRNVPSIQSRGLFGAI AGFIEGGWTGMVDGWYGYHHQNEQGSGYAADLKSTQNAIDKITNKVNSVIEKMNTQFTAV GKEFNHLEKRIENLNKKVDDGFLDIWTYNAELLVLLENERTLDYHDSNVKNLYEKVRNQL KNNAKEIGNGCFEFYHKCDNTCMESVKNGTYDYPKYSEEAKLNREKIDGVKLESTRIYQI LAIYSTVASSLVLVVSLGAISFWMCSNGSLQCRICI*H*DFR<br/>
 
-and also perform blastx [GitHub](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PROGRAM=blastx&PAGE_TYPE=BlastSearch&LINK_LOC=blasthome) to be certain of the sequence CDS (screenshot)<br/>
+and also perform [blastx](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PROGRAM=blastx&PAGE_TYPE=BlastSearch&LINK_LOC=blasthome) to be certain of the sequence CDS (screenshot)<br/>
 ![GitHub Logo](/images/logo.png) 
 which is started with ‘MKAILVVLLYTF’ and ended with ‘SLQCRICI’.<br/>
 Then, make necessary edits to the ‘problematic’ sequence, i.e. trim away ‘QKQGKTKATK’ and ‘H*DFR’<br/>
