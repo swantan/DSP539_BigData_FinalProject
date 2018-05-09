@@ -76,18 +76,18 @@ done; done
 ```rm *v2.pep```<br/>
 15.	```cd seq_foruse/```<br/>
 16.	Manually further edit sequence header using vi editor<br/>
-```vi <filename>```<br/>
-For example: ```vi swinefluH1N1_segment4_HA_v2.pep```<br/>
-Hit ‘Esc’ to enter coding mode everytime (do not hit ‘I’) and things to edit are as below:<br/>
-```:%s/rf 1 //g```<br/>
-```:%s/rf 3 //g```<br/>
-```:%s/Strain Name://g```<br/>
-```:%s/:/_/g```<br/>
-```:%s/ //g```<br/>
-```:%s/\//_/g```<br/>
-```:%s/|/-/g```<br/>
-After done all the above, hit ‘Esc’ again and type the command below to save<br/>
-```:wq!```<br/>
+   ```vi <filename>```<br/>
+   For example: ```vi swinefluH1N1_segment4_HA_v2.pep```<br/>
+   Hit ‘Esc’ to enter coding mode everytime (do not hit ‘I’) and things to edit are as below:<br/>
+   ```:%s/rf 1 //g```<br/>
+   ```:%s/rf 3 //g```<br/>
+   ```:%s/Strain Name://g```<br/>
+   ```:%s/:/_/g```<br/>
+   ```:%s/ //g```<br/>
+   ```:%s/\//_/g```<br/>
+   ```:%s/|/-/g```<br/>
+    After done all the above, hit ‘Esc’ again and type the command below to save<br/>
+   ```:wq!```<br/>
 17.	After done sequence header editing, proceed to submit all sequences in the folder *seq_foruse/* and *3.seq_tosubmit/DNAvaccineseq.pep* to the web-based tool.<br/>
 
 
