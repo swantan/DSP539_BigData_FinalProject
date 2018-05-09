@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1524808048836.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "337DCFD0",
+    "lastKnownWriteTime" : 288232575174967296,
+    "last_content_update" : 1524808048836,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "E1ED241C",
+        "caption" : "flu_data",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=flu_data&cache_key=E1ED241C",
+        "displayedObservations" : "576",
+        "environment" : "",
+        "object" : "flu_data",
+        "preview" : "0",
+        "totalObservations" : "576",
+        "variables" : "6"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "install.packages(\"plotly\")\nlibrary(tidyverse)\nlibrary(plotly)\n#load data header\n#identify and add strain's clade info\nflu_header_info <- read.csv(\"dataset/fullheader_GenomicFastaInfo.csv\", header = FALSE, stringsAsFactors = FALSE, sep = \"|\")\ncolnames(flu_header_info) <- c(\"StrainName\", \"ID\", \"Segment\", \"ProteinSymbol\", \"Type\", \"Subtype\", \n                        \"Date\", \"Season\", \"Country\", \"USAStates\", \"HostSpecies\",\n                        \"2009pH1N1like\", \"USSwineH1Clade\", \"GlobalSwineH1Clade\", \"H5Clade\")\nflu_header_info[is.na(flu_header_info$ProteinSymbol),]\nflu_header_info$ProteinSymbol[c(6,10,21,30,35,47,55,63,71,75,82,94,98,110,119,126,130,142,147,\n                                154,166,171,183,186,195,202,214,218,227,234,246,255,261,270,274,\n                                283,290,298,309,315,327,335,343,350,358,366,373,382,387,393,408,\n                                416,424,433,441,453,456,468,472,481,492,500,508,518,521,529,539,\n                                548,556,564,567,574)] <- \"NA\"\nclade_info <- flu_header_info %>% select(StrainName, ProteinSymbol, USSwineH1Clade) %>%\n  mutate(header = StrainName) %>% separate(header, into = c(\"subtype\", \"host\", \"area\", \"id\", \"year\"), \n                                           sep = \"/\",extra = \"merge\") %>%\n  group_by(subtype, host, area, id, year, USSwineH1Clade) %>% tally() %>% \n  mutate(name = paste(subtype, '/', host, '/',area, '/',id, '/', year))\ntoprint <- clade_info %>% select(name,USSwineH1Clade)  \nwrite.csv(toprint, \"clade_info.csv\")  \n  \ndf2 <- aggregate(x ~ Year + Month, data = toprint, sum)\n\n\nplot_ly(clade_info, labels = ~USSwineH1Clade, values = ~n, type = 'pie', textposition = 'outside', textinfo = 'label+percent', \n        rotation = -70, direction = 'clockwise') %>% layout(title = \"Distribution of Swine H1N1 Clusters\")\n",
+    "created" : 1524681666356.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1290994132",
+    "id" : "BBF04A5C",
+    "lastKnownWriteTime" : 1524685988,
+    "last_content_update" : 1524685988373,
+    "path" : "/Volumes/TOSHIBA/Research/10. SwineFluEpitopes/EpiCCAnalysis/scripts/fluinfo.r",
+    "project_path" : "scripts/fluinfo.r",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
