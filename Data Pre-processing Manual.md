@@ -1,8 +1,8 @@
 # Manual for Data Pre-processing
 
-Dataset: H1N1_swineIAV.FASTA, H1N1_swineIAV.xls, DNAvaccineseq.pep, vaccine_epitopes_classI.pep, vaccine_epitopes_classII.pep
-
-mkdir 2.data_preprocess → create R project and Python script in your current working directory → put H1N1_swineIAV.FASTA, H1N1_swineIAV.XLS in this newly created folder
+```mkdir 2.data_preprocess``` 
+→ create R project and Python script in your current working directory 
+→ ```cp H1N1_swineIAV.FASTA H1N1_swineIAV.XLS``` to this newly created folder
 
 mkdir 3.seq_tosubmit → put DNAvaccineseq.pep, vaccine_epitopes_classI.txt, vaccine_epitopes_classII.txt
 
