@@ -57,7 +57,7 @@ c. Then, make necessary edits to the ‘problematic’ sequence, i.e. trim away 
  **After**<br/>
  ![sequence edit 2](/2.data_preprocess/seq_edit2.png)<br/>
  
-11.	Proceed to removing the 72 ‘\*’ and save the file following the format in Table 1.<br/>
+11.	Proceed to removing the 72 ‘\*’ and save the file following the format in **Table 1**.<br/>
 12.	Repeat step 8 - 10 for the remaining 7 other proteins.<br/>
 13.	Next, modify and shorten the header. The reason being, there are certain criteria that has to comply for a file to be successfully uploaded to the web-based toolkit.<br/>
 >The criteria are:<br/>
