@@ -45,3 +45,6 @@ Contents:<br/>
 1. R project
 2. EpiCC results for Class I/II (.csv files)
 3. JMX results for Class I/II (.html files)
+
+## Result
+Refer to **POSTER_SwineFluProject.pdf**
