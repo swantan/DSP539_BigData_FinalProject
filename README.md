@@ -46,5 +46,5 @@ Contents:<br/>
 2. EpiCC results for Class I/II (.csv files)
 3. JMX results for Class I/II (.html files)
 
-## Result
+## Result Summary
 Refer to **POSTER_SwineFluProject.pdf**
