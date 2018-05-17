@@ -25,7 +25,7 @@ Folder: 1.dataset - A placeholder to put all original/raw files<br/>
 Contents:<br/>
 1. H1N1_swineIAV.FASTA
 2. H1N1_swineIAV.xls
-3. DNAvaccineseq.pep
+3. DNAvaccineseq.pep (data not shown)
 4. vaccine_epitopes_classI.pep
 5. vaccine_epitopes_classII.pep
 
